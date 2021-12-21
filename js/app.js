@@ -4,6 +4,7 @@ let giphySearchInputEl = $("#giphyInput");
 let giphySearchResultsContainerEl = $(".giphyResultsContainer");
 let giphySearchResultsEl = $(".giphyResults");
 let giphySearchTermEl = $("#giphySearch");
+let imgContainerEl = $("#image-container");
 
 function handleGiphySearch(event) {
   event.preventDefault();
@@ -51,11 +52,20 @@ function getStickers(stickers){
         let imageUrl = sticker[i].images.fixed_height_small.url;
         let imageAlt = sticker[i].title;
         let imageEl = $("<img>").attr({"src": imageUrl, "alt" : imageAlt, "title" :imageAlt});
-
+        imageEl.on("click", pasteSticker);
         giphySearchResultsEl.append(imageEl);
     }
 }
 
+function pasteSticker(event){
+    event.preventDefault();
+    console.log($(this));
+    let customizableSticker = $(this);
+    customizableSticker.clone().appendTo(imgContainerEl);
+}
 
+function positionSticker(){
+    
+}
 
 giphySearchEl.on("submit", handleGiphySearch);

@@ -59,3 +59,7 @@ set font sizes in rems to scale relative to the body font-size
 .filterIcons .card {
   cursor: pointer;
 }
+
+.giphyResults img{
+  cursor: pointer;
+}
