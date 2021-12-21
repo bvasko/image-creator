@@ -2,6 +2,7 @@
   /* color variables */
 
   /* padding, margin, border variables */
+  box-sizing: border-box;
 
   /* other vars */
 }
@@ -24,4 +25,15 @@ set font sizes in rems to scale relative to the body font-size
   aspect-ratio: 1 / 1;
   width: 100%;
   border: 2px solid rgb(66, 68, 66);
+}
+
+.scrollMenu {
+  background-color: white;
+  overflow: auto;
+  /* white-space: nowrap; */
+}
+
+.scrollMenu img {
+  display: inline-block;
+  text-align: center;
 }
