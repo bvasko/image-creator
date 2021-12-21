@@ -1,45 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"
-      rel="stylesheet"
-    /> -->
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!doctype html>
+<html class="no-js" lang="">
 
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Social Media Image Editor</title>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
-<body class="container">
-    
-    <header class="col s12 teal">
-        <h1>Social Media Image Editor</h1>
+
+<body>
+  <!-- Add your site or application content here -->
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+    <header>
+      <h1>Social Media Image Creator</h1>
     </header>
-    <main class="row">
-        <form class=" col s4">
-            
-        </form>
-    </main>
-    <!-- <div class="mui-container-fluid">
-        <form>
-        </form>
-    </div> -->
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script> -->
-    <!-- <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> -->
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    </div></div>
+    <div class="row">
+      <div class="col s6">
+        <!-- The main image container goes over here -->
+        <div id="image-container"></div>
+      </div>
+      <div class="col s6">
+        <!-- The image customization controls will go on this side -->
+        <div class="divider">
+          
+        </div>
+        <div class="section">
+          <h5>Choose your image</h5>
+          <p>[unlayer search input here]</p>
+          <div>[Unlayer search results]</div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Search for stickers</h5>
+          <p>[Sticker search input here]</p>
+          <div>[Sticker search results]</div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Add Text</h5>
+          <p>[input text box]</p>
+        </div>
+        <div class="section">
+          <h5>Apply Filters</h5>
+          <p>[Filter selection here]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/app.js"></script>
+
 </body>
+
 </html>

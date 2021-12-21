@@ -1,0 +1,27 @@
+:root {
+  /* color variables */
+
+  /* padding, margin, border variables */
+
+  /* other vars */
+}
+
+body {
+  /* set base font size */
+  font-size: 16px;
+}
+
+/* 
+Note to devs:
+set font sizes in rems to scale relative to the body font-size 
+*/
+
+.container {
+  width: 90%;
+}
+
+#image-container {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border: 2px solid rgb(66, 68, 66);
+}
