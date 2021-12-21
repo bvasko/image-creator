@@ -12,5 +12,10 @@ function handleGiphySearch(event){
     }
     giphySearchInput.value = "";
     // giphySearchResults.value = "";
+    giphyStickerSearch(stickerSearch);
+}
+
+function giphyStickerSearch(search){
+
 }
 giphySearchEl.addEventListener("submit", handleGiphySearch);
