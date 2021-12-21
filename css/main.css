@@ -36,5 +36,26 @@ set font sizes in rems to scale relative to the body font-size
 .scrollMenu img {
   display: inline-block;
   text-align: center;
+}
 
+/** filter sample images */
+
+[data-filter="blur"] {
+    -webkit-filter: blur(5px);
+            filter: blur(5px);
+}
+[data-filter="brightness"] {
+  filter: brightness(0.9);
+}
+[data-filter="grayscale"] {
+  -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+[data-filter="invert"] {
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+.filterIcons .card {
+  cursor: pointer;
 }
