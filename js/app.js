@@ -11,6 +11,9 @@ function handleGiphySearch(event) {
   if (!stickerSearch) {
     console.error("Need search input");
   }
+  giphySearchResultsEl.empty();
+
+  
   giphySearchTermEl.text("");
   giphySearchInputEl.val("");
   giphySearchTermEl.text(stickerSearch);
@@ -47,7 +50,7 @@ function getStickers(stickers){
     for(i=0; i<sticker.length;i++){
         let imageUrl = sticker[i].images.fixed_height_small.url;
         let imageAlt = sticker[i].title;
-        let imageEl = $("<img>").attr("src",imageUrl);
+        let imageEl = $("<img>").attr({"src": imageUrl, "alt" : imageAlt, "title" :imageAlt});
 
         giphySearchResultsEl.append(imageEl);
     }
