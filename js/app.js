@@ -28,7 +28,7 @@ function giphyStickerSearch(search) {
     console.log(searchVal);
     giphySearchTermEl.text(searchVal);
 
-    let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search+"&limit=5&offset=0&rating=g&lang=en&bundlde=fixed_width_small";
+    let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search+"&limit=5&offset=0&rating=g&lang=en&bundle=fixed_width_small";
     // let giphyAPIUrl = "https://g.tenor.com/v1/search?q=" + search+ "&" + tenorKey+  "&limit=5&contentfitler=high&media_filter=minimal";
 
   fetch(giphyAPIUrl)
