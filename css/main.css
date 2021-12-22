@@ -3,7 +3,6 @@
 
   /* padding, margin, border variables */
   box-sizing: border-box;
-  --filter-type: grayscale(100%);
   /* other vars */
 }
 
@@ -67,6 +66,8 @@ set font sizes in rems to scale relative to the body font-size
 /** create pseudo-element to fake a background image */
 #image-container {
   position: relative;
+
+  --filter-type: none;
 }
 
 #image-container::before {
@@ -78,7 +79,7 @@ set font sizes in rems to scale relative to the body font-size
   background-image: url("../images/filter_sample_img.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  filter: var(--filter-type)
+  filter: var(--filter-type);
 }
 
 .module-inside {
