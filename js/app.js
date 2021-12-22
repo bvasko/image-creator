@@ -1,4 +1,5 @@
 let giphyKey = "bAqrGC0EFBsitN09IxRQsJdQPme35o1E";
+let tenorKey = "6FGOA1MVEPK6";
 let giphySearchEl = $(".giphyForm");
 let giphySearchInputEl = $("#giphyInput");
 let giphySearchResultsContainerEl = $(".giphyResultsContainer");
@@ -10,22 +11,30 @@ let filterIcons = $(".card-image");
 
 function handleGiphySearch(event) {
   event.preventDefault();
-  let stickerSearch = giphySearchInputEl.val().trim();
+  let uneditiedStickerSearch = giphySearchInputEl.val().trim();
+  let stickerSearch = uneditiedStickerSearch.replace(/\s/g, "+");
   if (!stickerSearch) {
     console.error("Need search input");
   }
   giphySearchResultsEl.empty();
   giphySearchTermEl.text("");
   giphySearchInputEl.val("");
-  giphySearchTermEl.text(stickerSearch);
+//   giphySearchTermEl.text(stickerSearch);
   giphyStickerSearch(stickerSearch);
 }
 
 function giphyStickerSearch(search) {
-  let giphyAPIUrl =
-    "https://api.giphy.com/v1/stickers/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q=" +
-    search +
-    "&limit=10&rating=g&lang=en";
+    console.log(search);
+    let searchVal = search.replace(/\+/g," ");
+    console.log(searchVal);
+    giphySearchTermEl.text(searchVal);
+
+    let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search+"&limit=5&offset=0&rating=g&lang=en&bundlde=fixed_width_small";
+    // let giphyAPIUrl = "https://g.tenor.com/v1/search?q=" + search+ "&" + tenorKey+  "&limit=5&contentfitler=high&media_filter=minimal";
+
+    // "https://api.giphy.com/v1/stickers/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q=" +
+    // search +
+    // "&offset=0&rating=g&lang=en";
 
   fetch(giphyAPIUrl)
     .then(function (response) {
@@ -37,8 +46,13 @@ function giphyStickerSearch(search) {
     })
     .then(function (data) {
       console.log(data);
-      getStickers(data);
-    })
+      if(data.data.length == 0){
+        giphySearchTermEl.text("No results found for: " + search);
+        console.log(data);
+        }
+        else{
+        getStickers(data);
+    }})
     .catch(function (error) {
       console.error(error);
     });
@@ -65,7 +79,7 @@ function pasteSticker(event){
 }
 
 function positionSticker(){
-    
+
 }
 
 function applyFilter(event) {
