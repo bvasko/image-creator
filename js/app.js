@@ -19,7 +19,6 @@ function handleGiphySearch(event) {
   
   giphySearchTermEl.text("");
   giphySearchInputEl.val("");
-//   giphySearchTermEl.text(stickerSearch);
   giphyStickerSearch(stickerSearch);
 }
 
@@ -31,10 +30,6 @@ function giphyStickerSearch(search) {
 
     let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search+"&limit=5&offset=0&rating=g&lang=en&bundlde=fixed_width_small";
     // let giphyAPIUrl = "https://g.tenor.com/v1/search?q=" + search+ "&" + tenorKey+  "&limit=5&contentfitler=high&media_filter=minimal";
-
-    // "https://api.giphy.com/v1/stickers/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q=" +
-    // search +
-    // "&offset=0&rating=g&lang=en";
 
   fetch(giphyAPIUrl)
     .then(function (response) {
