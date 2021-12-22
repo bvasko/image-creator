@@ -30,7 +30,7 @@ set font sizes in rems to scale relative to the body font-size
 .scrollMenu {
   background-color: white;
   overflow: auto;
-  /* white-space: nowrap; */
+  white-space: nowrap;
 }
 
 .scrollMenu img {
@@ -57,5 +57,9 @@ set font sizes in rems to scale relative to the body font-size
 }
 
 .filterIcons .card {
+  cursor: pointer;
+}
+
+.giphyResults img{
   cursor: pointer;
 }
