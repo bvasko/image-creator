@@ -1,156 +1,140 @@
 <!DOCTYPE html>
 <html class="no-js" lang="">
-  <head>
-    <meta charset="utf-8" />
-    <title>Social Media Image Creator</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="og:title" content="" />
-    <meta property="og:type" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="icon.png" />
-    <link rel="stylesheet" href="css/materialize.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <title>Social Media Image Creator</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <body>
-    <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <header>
-            <h1>Social Media Image Creator</h1>
-          </header>
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.png" />
+  <link rel="stylesheet" href="css/materialize.min.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <!-- Add your site or application content here -->
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <header>
+          <h1>Social Media Image Creator</h1>
+        </header>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <!-- The main image container goes over here -->
+        <div id="image-container">
+          <div class="module-inside"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col s6">
-          <!-- The main image container goes over here -->
-          <div id="image-container"></div>
-        </div>
-        <div class="col s6">
-          <!-- The image customization controls will go on this side -->
-          <div class="divider">
+      <div class="col s6">
+        <!-- The image customization controls will go on this side -->
+        <div class="divider">
 
-          </div>
-          <div class="section">
-            <h5>Choose your image</h5>
-            <!--img-search-->
-            <form class="input-field col s12" id="imgForm">
-              <input id="img-search" type="text">
-              <label for="img-search">Image Search</label>
-              <!--img-search-btn-->
-              <button class="btn waves-effect waves-light" type="submit">Search
-                <i class="material-icons right"></i>
-              </button>
-            </form>
-            <!--search results-->
-            <div class="imgSearchResultsContainer">
-              <div class="section"></div>
-              <h5>Search Results: <span id =""></span></h5><hr>
-              <div class="row">
-                <div class="col 1" id="image"></div>
-              </div>
-              
+        </div>
+        <div class="section">
+          <h5>Choose your image</h5>
+          <!--img-search-->
+          <form class="input-field col s12" id="imgForm">
+            <input id="img-search" type="text">
+            <label for="img-search">Image Search</label>
+            <!--img-search-btn-->
+            <button class="btn waves-effect waves-light" type="submit">Search
+              <i class="material-icons right"></i>
+            </button>
+          </form>
+          <!--search results-->
+          <div class="imgSearchResultsContainer">
+            <div class="section"></div>
+            <h5>Search Results: <span id=""></span></h5>
+            <hr>
+            <div class="row">
+              <div class="col 1" id="image"></div>
             </div>
+
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col s6">
-          <!-- The main image container goes over here -->
-          <div id="image-container">
-            <div class="module-inside"></div>
+
+      <div class="col s6">
+        <!-- section for giphy search api -->
+        <div class="divider row"></div>
+        <div class="section">
+          <h5>Search for stickers</h5>
+          <form class="giphyForm">
+            <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
+            <button type="submit" class="btn waves-effect waves-light">
+              Search
+            </button>
+          </form>
+          <div class="giphyResultsContainer">
+            <h5>Search Results for: <span id="giphySearch"></span></h5>
+            <section class="giphyResults scrollMenu">
+            </section>
           </div>
         </div>
-        <div class="col s6">
-          <!-- The image customization controls will go on this side -->
-          <div class="divider"></div>
-          <div class="section">
-            <h5>Choose your image</h5>
-            <p>[unlayer search input here]</p>
-            <div>[Unlayer search results]</div>
-          </div>
-          <!-- section for giphy search api -->
-          <div class="divider row"></div>
-          <div class="section">
-            <h5>Search for stickers</h5>
-              <form class="giphyForm">
-                <input
-                  id="giphyInput"
-                  type="text"
-                  placeholder="Stickers"
-                  autofocus="true"
-                  name="giphy"
-                />
-                <button type="submit" class="btn waves-effect waves-light">
-                  Search
-                </button>
-              </form>
-              <div class="giphyResultsContainer">
-                <h5>Search Results for: <span id ="giphySearch"></span></h5>
-                <section class="giphyResults scrollMenu">
-                </section>
-              </div>
-          </div>
-          <div class="divider"></div>
-          <div class="section">
-            <h5>Add Text</h5>
-            <p>[input text box]</p>
-          </div>
-          <div class="section">
-            <h5>Apply Filters</h5>
-            <div class="filterIcons row">
-              <div class="col s12 m3">
-                <div class="card">
-                  <div class="card-image">
-                    <img data-filter="blur(5px)" src="images/filter_sample_img.jpg">
-                    <span class="card-title">Blur</span>
-                  </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Add Text</h5>
+          <p>[input text box]</p>
+        </div>
+        <div class="section">
+          <h5>Apply Filters</h5>
+          <div class="filterIcons row">
+            <div class="col s12 m3">
+              <div class="card">
+                <div class="card-image">
+                  <img data-filter="blur(5px)" src="images/filter_sample_img.jpg">
+                  <span class="card-title">Blur</span>
                 </div>
               </div>
-              <div class="col s12 m3">
-                <div class="card">
-                  <div class="card-image">
-                    <img data-filter="brightness(0.4)" src="images/filter_sample_img.jpg">
-                    <span class="card-title">Brightness</span>
-                  </div>
+            </div>
+            <div class="col s12 m3">
+              <div class="card">
+                <div class="card-image">
+                  <img data-filter="brightness(0.4)" src="images/filter_sample_img.jpg">
+                  <span class="card-title">Brightness</span>
                 </div>
               </div>
-              <div class="col s12 m3">
-                <div class="card">
-                  <div class="card-image">
-                    <img data-filter="grayscale(50%)" src="images/filter_sample_img.jpg">
-                    <span class="card-title">Grayscale</span>
-                  </div>
+            </div>
+            <div class="col s12 m3">
+              <div class="card">
+                <div class="card-image">
+                  <img data-filter="grayscale(50%)" src="images/filter_sample_img.jpg">
+                  <span class="card-title">Grayscale</span>
                 </div>
               </div>
-              <div class="col s12 m3">
-                <div class="card">
-                  <div class="card-image">
-                    <img data-filter="invert(75%)" src="images/filter_sample_img.jpg">
-                    <span class="card-title">Invert</span>
-                  </div>
+            </div>
+            <div class="col s12 m3">
+              <div class="card">
+                <div class="card-image">
+                  <img data-filter="invert(75%)" src="images/filter_sample_img.jpg">
+                  <span class="card-title">Invert</span>
                 </div>
               </div>
-            </div> <!-- close row -->
-          </div>
+            </div>
+          </div> <!-- close row -->
         </div>
       </div>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
   <script src="js/app.js"></script>
 
-  </body>
+</body>
 
 </html>
