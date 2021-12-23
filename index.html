@@ -40,9 +40,6 @@
       </div>
       <div class="col s6">
         <!-- The image customization controls will go on this side -->
-        <div class="divider">
-
-        </div>
         <div class="section">
           <h5>Choose your image</h5>
           <!--img-search-->
@@ -56,20 +53,16 @@
           </form>
           <!--search results-->
           <div class="imgSearchResultsContainer">
-            <div class="section"></div>
             <h5>Search Results: <span id=""></span></h5>
-            <hr>
             <div class="row">
-              <div class="col 1" id="image"></div>
+              <section class="scrollMenu" id="image"></section>
             </div>
 
           </div>
         </div>
-      </div>
-
-      <div class="col s6">
+   
         <!-- section for giphy search api -->
-        <div class="divider row"></div>
+        <div class="divider"></div>
         <div class="section">
           <h5>Search for stickers</h5>
           <form class="giphyForm">
@@ -89,46 +82,49 @@
           <h5>Add Text</h5>
           <p>[input text box]</p>
         </div>
-        <div class="section">
-          <h5>Apply Filters</h5>
-          <div class="filterIcons row">
-            <div class="col s12 m3">
-              <div class="card">
-                <div class="card-image">
-                  <img data-filter="blur(5px)" src="images/filter_sample_img.jpg">
-                  <span class="card-title">Blur</span>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m3">
-              <div class="card">
-                <div class="card-image">
-                  <img data-filter="brightness(0.4)" src="images/filter_sample_img.jpg">
-                  <span class="card-title">Brightness</span>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m3">
-              <div class="card">
-                <div class="card-image">
-                  <img data-filter="grayscale(50%)" src="images/filter_sample_img.jpg">
-                  <span class="card-title">Grayscale</span>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m3">
-              <div class="card">
-                <div class="card-image">
-                  <img data-filter="invert(75%)" src="images/filter_sample_img.jpg">
-                  <span class="card-title">Invert</span>
-                </div>
-              </div>
-            </div>
-          </div> <!-- close row -->
-        </div>
+       
       </div>
     </div>
-  </div>
+    <!-- image filter section -->
+    <div class="row">
+      <div class="section">
+        <h5>Apply Filters</h5>
+        <div class="filterIcons row">
+          <div class="col s3 m1">
+            <div class="card">
+              <div class="card-image">
+                <img data-filter="blur(5px)" src="images/filter_sample_img.jpg">
+                <span class="card-title">Blur</span>
+              </div>
+            </div>
+          </div>
+          <div class="col s3 m1">
+            <div class="card">
+              <div class="card-image">
+                <img data-filter="brightness(0.4)" src="images/filter_sample_img.jpg">
+                <span class="card-title">Brightness</span>
+              </div>
+            </div>
+          </div>
+          <div class="col s3 m1">
+            <div class="card">
+              <div class="card-image">
+                <img data-filter="grayscale(50%)" src="images/filter_sample_img.jpg">
+                <span class="card-title">Grayscale</span>
+              </div>
+            </div>
+          </div>
+          <div class="col s3 m1">
+            <div class="card">
+              <div class="card-image">
+                <img data-filter="invert(75%)" src="images/filter_sample_img.jpg">
+                <span class="card-title">Invert</span>
+              </div>
+            </div>
+          </div>
+        </div> <!-- close row -->
+      </div>
+    </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
