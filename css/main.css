@@ -27,10 +27,7 @@ set font sizes in rems to scale relative to the body font-size
 }
 
 #image {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 12px;
+  overflow-y: hidden;
 }
   
 .scrollMenu {
@@ -42,6 +39,11 @@ set font sizes in rems to scale relative to the body font-size
 .scrollMenu img {
   display: inline-block;
   text-align: center;
+  margin-right: 4px;
+  border: 2px solid #000;
+}
+.imgSearchResultsContainer .scrollMenu img {
+  max-height: 100px;
 }
 
 /** filter sample images */
