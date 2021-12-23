@@ -34,14 +34,17 @@ function getApi(imgSearchVal) {
     .then(function (data) {
       console.log(data)
 
-      for (var i = 0; i < 9; i++) {
-        // let imageElement = document.createElement('img');
+      for (let i = 0; i < 9; i++) {
         const img = document.createElement("img");
         img.src = data.results[i].urls.thumb;
-        img.style.padding = "5px";
-        img.style.border = "3px solid #ffffff";
-        img.style.borderRadius = "10px;"
+
+        img.addEventListener("click", function (event) {
+          console.log("clicked");
+          console.log(event.target.src);
+        })
+
         imgSearchResultsEl.append(img);
+
 
       }
 
