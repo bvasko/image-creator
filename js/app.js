@@ -69,11 +69,18 @@ function getStickers(stickers){
 function pasteSticker(event){
     event.preventDefault();
     console.log($(this));
-    let customizableSticker = $(this);
-    customizableSticker.clone().appendTo(imgContainerEl);
+    let stickerContainer = $("<div>");
+    let customizableSticker = $(this).clone();
+    customizableSticker.addClass("draggable");
+    stickerContainer.append(customizableSticker);
+    stickerContainer.appendTo(imgContainerEl);
 }
 
-function positionSticker(){
+$(function(){
+    $(".draggable").draggable();
+});
+
+function removeSticker(){
 
 }
 
