@@ -30,15 +30,37 @@ function getApi(imgSearchVal) {
     .then(function (data) {
       console.log(data)
 
-      for (var i = 0; i < 9; i++) {
-        // let imageElement = document.createElement('img');
+      for (let i = 0; i < 9; i++) {
         const img = document.createElement("img");
         img.src = data.results[i].urls.thumb;
+
+        img.addEventListener("click", function (event) {
+          console.log("clicked");
+          console.log(event.target.src);
+          let selectedImg = event.target.src;
+          console.log(selectedImg);
+          let image = new Image();
+          console.log(image);
+          image.src = selectedImg;
+          // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
+          imgDisplay = document.querySelector("#image-container");
+          imgDisplay.style.setProperty(`--background-image-url`, selectedImg);
+          console.log(imgDisplay);
+          
+        })
         imgSearchResultsEl.append(img);
       }
+
+
+
+
     });
+    
 }
 imgSearchEl.addEventListener('submit', formSubmitHandler);
+
+
+
 let giphyKey = "bAqrGC0EFBsitN09IxRQsJdQPme35o1E";
 let tenorKey = "6FGOA1MVEPK6";
 let giphySearchEl = $(".giphyForm");

@@ -66,8 +66,8 @@ h1 {
 /** create pseudo-element to fake a background image */
 #image-container {
   position: relative;
-  --filter-type: none;
   --background-image-url: url("../images/filter_sample_img.jpg");
+  --filter-type: none;
 }
 
 #image-container::before {
