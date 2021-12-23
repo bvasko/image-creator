@@ -29,6 +29,14 @@ set font sizes in rems to scale relative to the body font-size
 .draggable img{
   cursor: move;
 }
+
+#image {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+  
 .scrollMenu {
   background-color: white;
   overflow: auto;
