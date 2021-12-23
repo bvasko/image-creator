@@ -124,15 +124,23 @@ function pasteSticker(event){
     stickerContainer.appendTo(imgContainerEl);
 }
 
+let position = {x:0, y:0};
+interact('.draggable').draggable({
+    listeners: {
+      start (event) {
+        console.log(event.type, event.target)
+      },
+      move (event) {
+        position.x += event.dx
+        position.y += event.dy
+  
+        event.target.style.transform =
+          `translate(${position.x}px, ${position.y}px)`
+      },
+    }
+  })
 
 
-$(function(){
-    $(".draggable").draggable({handle: "img"});
-    $("#droppable").droppable({accept: ".draggable"});
-});
-$(function(){
-    $(".draggable").resize();
-})
 
 function removeSticker(){
     //button under img container to remove a selected sticker
