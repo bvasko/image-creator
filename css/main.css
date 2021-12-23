@@ -16,6 +16,11 @@ Note to devs:
 set font sizes in rems to scale relative to the body font-size 
 */
 
+h1 {
+  font-size: 2.6rem;
+  margin: 24px;
+}
+
 .container {
   width: 90%;
 }
