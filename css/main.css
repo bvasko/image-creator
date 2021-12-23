@@ -16,6 +16,11 @@ Note to devs:
 set font sizes in rems to scale relative to the body font-size 
 */
 
+h1 {
+  font-size: 2.6rem;
+  margin: 24px;
+}
+
 .container {
   width: 90%;
 }
@@ -27,10 +32,7 @@ set font sizes in rems to scale relative to the body font-size
 }
 
 #image {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 12px;
+  overflow-y: hidden;
 }
   
 .scrollMenu {
@@ -42,6 +44,11 @@ set font sizes in rems to scale relative to the body font-size
 .scrollMenu img {
   display: inline-block;
   text-align: center;
+  margin-right: 4px;
+  border: 2px solid #000;
+}
+.imgSearchResultsContainer .scrollMenu img {
+  max-height: 100px;
 }
 
 /** filter sample images */
@@ -73,7 +80,7 @@ set font sizes in rems to scale relative to the body font-size
 /** create pseudo-element to fake a background image */
 #image-container {
   position: relative;
-
+  --background-image-url: url("../images/filter_sample_img.jpg");
   --filter-type: none;
 }
 
@@ -83,7 +90,7 @@ set font sizes in rems to scale relative to the body font-size
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../images/filter_sample_img.jpg");
+  background-image: var(--background-image-url);
   background-repeat: no-repeat;
   background-size: cover;
   filter: var(--filter-type);

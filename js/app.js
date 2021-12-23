@@ -1,7 +1,3 @@
-//unsplashed access key = EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI
-//unsplashed secret key =  fiUIPd3h7dVWI683NCuKsFuj4YAipHr-XnBEr1_s9Ps
-//https://api.unsplash.com/photos/?client_id=YOUR_APPLICATION_ID
-
 var imgSearchEl = document.querySelector("#imgForm");
 var imgSearchInputEl = document.querySelector("#img-search");
 
@@ -17,15 +13,15 @@ var formSubmitHandler = function (event) {
     getApi(imgSearchVal);
     imgSearchInputEl.value = '';
   } else {
-    console.error('Please enter a search term!');
+    //TODO: change this to a modal
+    alert('Please enter a search term');
   }
 
 };
 
 function getApi(imgSearchVal) {
   var accessKey = "EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI";
-  // var requestUrl = 'https://api.unsplash.com/search/photos?&query=' + imgSearchVal + "/?client_id=" + accessKey;
-  var requestUrl = "https://api.unsplash.com/search/photos?query=" + imgSearchVal + "&content_filter=high&client_id=" + accessKey + "&fm=jpg"
+  var requestUrl = "https://api.unsplash.com/search/photos?query=" + imgSearchVal + "&orientation=squarish&content_filter=high&client_id=" + accessKey + "&fm=jpg"
 
   fetch(requestUrl)
     .then(function (response) {
@@ -41,16 +37,29 @@ function getApi(imgSearchVal) {
         img.addEventListener("click", function (event) {
           console.log("clicked");
           console.log(event.target.src);
+          let selectedImg = event.target.src;
+          console.log(selectedImg);
+          let image = new Image();
+          console.log(image);
+          image.src = selectedImg;
+          // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
+          imgDisplay = document.querySelector("#image-container");
+          imgDisplay.style.setProperty(`--background-image-url`, selectedImg);
+          console.log(imgDisplay);
+          
         })
-
         imgSearchResultsEl.append(img);
-
-
       }
 
+
+
+
     });
+    
 }
 imgSearchEl.addEventListener('submit', formSubmitHandler);
+
+
 
 //////////////////////////////////////////////////////////////////////////////
 
