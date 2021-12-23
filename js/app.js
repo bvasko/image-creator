@@ -5,7 +5,9 @@ let giphySearchInputEl = $("#giphyInput");
 let giphySearchResultsContainerEl = $(".giphyResultsContainer");
 let giphySearchResultsEl = $(".giphyResults");
 let giphySearchTermEl = $("#giphySearch");
-let imgContainerEl = $("#image-container");
+let imgContainerEl = $("#image-container .module-inside");
+let filterIcons = $(".card-image");
+
 
 function handleGiphySearch(event) {
   event.preventDefault();
@@ -15,8 +17,6 @@ function handleGiphySearch(event) {
     console.error("Need search input");
   }
   giphySearchResultsEl.empty();
-
-  
   giphySearchTermEl.text("");
   giphySearchInputEl.val("");
   giphyStickerSearch(stickerSearch);
@@ -58,11 +58,11 @@ function getStickers(stickers){
     let sticker = stickers.data;
     console.log(sticker[0].title);
     for(i=0; i<sticker.length;i++){
-        let imageUrl = sticker[i].images.fixed_height_small.url;
-        let imageAlt = sticker[i].title;
-        let imageEl = $("<img>").attr({"src": imageUrl, "alt" : imageAlt, "title" :imageAlt});
-        imageEl.on("click", pasteSticker);
-        giphySearchResultsEl.append(imageEl);
+      let imageUrl = sticker[i].images.fixed_height_small.url;
+      let imageAlt = sticker[i].title;
+      let imageEl = $("<img>").attr({"src": imageUrl, "alt" : imageAlt, "title" :imageAlt});
+      imageEl.on("click", pasteSticker);
+      giphySearchResultsEl.append(imageEl);
     }
 }
 
@@ -84,4 +84,13 @@ function removeSticker(){
 
 }
 
+function applyFilter(event) {
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  const filterType = event.currentTarget.firstElementChild.dataset.filter;
+  display = document.querySelector('#image-container');
+  display.style.setProperty(`--filter-type`, `${filterType}`);
+}
+
 giphySearchEl.on("submit", handleGiphySearch);
+filterIcons.on("click", applyFilter);
