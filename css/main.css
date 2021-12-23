@@ -25,3 +25,17 @@ set font sizes in rems to scale relative to the body font-size
   width: 100%;
   border: 2px solid rgb(66, 68, 66);
 }
+
+#image {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 12px;
+  
+  
+  
+  
+  
+  
+  
+}

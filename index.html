@@ -43,43 +43,44 @@
           <div class="section">
             <h5>Choose your image</h5>
             <!--img-search-->
-            <div class="input-field col s12">
-              <input id="img-search" name="img-search" type="text" class="validate">
+            <form class="input-field col s12" id="imgForm">
+              <input id="img-search" type="text">
               <label for="img-search">Image Search</label>
               <!--img-search-btn-->
-              <button class="btn waves-effect waves-light" type="submit" name="action">Search
+              <button class="btn waves-effect waves-light" type="submit">Search
                 <i class="material-icons right"></i>
               </button>
-            </div>
+            </form>
             <!--search results-->
-            <div>
-              <h5>Search Results</h5>
-              <div class="section">
-                <div id="img-results">
-                  <p>Image results will populate here as thumbnails.  </p>
-                </div>
+            <div class="imgSearchResultsContainer">
+              <div class="section"></div>
+              <h5>Search Results: <span id =""></span></h5><hr>
+              <div class="row">
+                <div class="col 1" id="image"></div>
               </div>
               
             </div>
           </div>
-          <div class="divider"></div>
-          <div class="section">
-            <h5>Search for stickers</h5>
-            <p>[Sticker search input here]</p>
-            <div>[Sticker search results]</div>
-          </div>
-          <div class="divider"></div>
-          <div class="section">
-            <h5>Add Text</h5>
-            <p>[input text box]</p>
-          </div>
-          <div class="section">
-            <h5>Apply Filters</h5>
-            <p>[Filter selection here]</p>
-          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Search for stickers</h5>
+          <p>[Sticker search input here]</p>
+          <div>[Sticker search results]</div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Add Text</h5>
+          <p>[input text box]</p>
+        </div>
+        <div class="section">
+          <h5>Apply Filters</h5>
+          <p>[Filter selection here]</p>
         </div>
       </div>
     </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="js/materialize.min.js"></script>
     <script src="./js/app.js"></script>
 
