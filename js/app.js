@@ -117,27 +117,66 @@ function getStickers(stickers){
 function pasteSticker(event){
     event.preventDefault();
     console.log($(this));
-    let stickerContainer = $("<div>");
+    // let stickerContainer = $("<div>");
     let customizableSticker = $(this).clone();
-    customizableSticker.addClass("draggable ui-widget-content");
-    stickerContainer.append(customizableSticker);
-    stickerContainer.appendTo(imgContainerEl);
+    customizableSticker.addClass("draggable");
+    // stickerContainer.append(customizableSticker);
+    customizableSticker.appendTo(imgContainerEl);
 }
 
-let position = {x:0, y:0};
+// let position = {x:0, y:0};
+const restrictParent = interact.modifiers.restrictRect({
+    restriction: "#image-container",
+    // endOnly: true
+});
+
+
+
 interact('.draggable').draggable({
+    maxPerElement: Infinity,
+    modifiers: [restrictParent],
     listeners: {
       start (event) {
         console.log(event.type, event.target)
-      },
+        // let rectDim = rectChecker();
+        // console.log(rectDim);
+      }
+    ,
       move (event) {
-        position.x += event.dx
-        position.y += event.dy
-  
-        event.target.style.transform =
-          `translate(${position.x}px, ${position.y}px)`
-      },
+        //   console.log(event.type,event.target);
+        // position.x += event.dx
+        // position.y += event.dy
+        
+        let {x,y} = event.target.dataset;
+              x= (parseFloat(x) || 0) + event.dx;
+              y = (parseFloat(y) || 0) + event.dy;
+              Object.assign(event.target.style.transform =`translate(${x}px, ${y}px)`)
+        Object.assign(event.target.dataset, {x,y})
+        },
+      end (event){
+        console.log(event.type);
+      }
     }
+})
+    
+
+
+  interact(".draggable").resizable({
+      edges: {top: true, left: true, bottom: true, right: true},
+      modifiers: [restrictParent],
+      listeners: {
+          move (event){
+              let {a,b} = event.target.dataset;
+              a= (parseFloat(a) || 0) + event.deltaRect.right;
+              b = (parseFloat(b) || 0) + event.deltaRect.top;
+              Object.assign(event.target.style, {
+                  width: `${event.rect.width}px`,
+                  height: `${event.rect.height}px`,
+                //   transform: `translate(${a}px, ${b}px)`
+              })
+              Object.assign(event.target.dataset, { a, b })
+          }
+      }
   })
 
 
