@@ -47,7 +47,6 @@ let giphySearchResultsContainerEl = $(".giphyResultsContainer");
 let giphySearchResultsEl = $(".giphyResults");
 let giphySearchTermEl = $("#giphySearch");
 let imgContainerEl = $("#image-container .module-inside");
-let filterIcons = $(".card-image");
 
 
 function handleGiphySearch(event) {
@@ -124,13 +123,4 @@ function positionSticker() {
 
 }
 
-function applyFilter(event) {
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-  const filterType = event.currentTarget.firstElementChild.dataset.filter;
-  display = document.querySelector('#image-container');
-  display.style.setProperty(`--filter-type`, `${filterType}`);
-}
-
 giphySearchEl.on("submit", handleGiphySearch);
-filterIcons.on("click", applyFilter);
