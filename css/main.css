@@ -26,8 +26,8 @@ set font sizes in rems to scale relative to the body font-size
   border: 2px solid rgb(66, 68, 66);
   /* position:absolute; */
 }
-.draggable{
-  float: right;
+.draggable img{
+  cursor: move;
 }
 .scrollMenu {
   background-color: white;

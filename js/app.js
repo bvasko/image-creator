@@ -71,17 +71,23 @@ function pasteSticker(event){
     console.log($(this));
     let stickerContainer = $("<div>");
     let customizableSticker = $(this).clone();
-    customizableSticker.addClass("draggable");
+    customizableSticker.addClass("draggable ui-widget-content");
     stickerContainer.append(customizableSticker);
     stickerContainer.appendTo(imgContainerEl);
 }
 
+
+
 $(function(){
-    $(".draggable").draggable();
+    $(".draggable").draggable({handle: "img"});
+    $("#droppable").droppable({accept: ".draggable"});
 });
+$(function(){
+    $(".draggable").resize();
+})
 
 function removeSticker(){
-
+    //button under img container to remove a selected sticker
 }
 
 function applyFilter(event) {
