@@ -41,10 +41,15 @@
         <div class="section">
           <h5>Apply Filters</h5>
           <div id="FilterIcons" class="scrollMenu filterIcons row"></div> <!-- close row -->
-          <form action="#">
+          
             <h5>Adjust Filter intensity</h5>
+            <form action="#">
+            <div class="flex-container">
+              <select id="filterNameSelect" class="browser-default"></select>
+              <div id="displayIntensity"></div>
+            </div>
             <p class="range-field">
-              <input type="range" id="test5" min="0" max="100" />
+              <input type="range" id="intensityVal" min="0" max="100" />
             </p>
           </form>
         </div>
