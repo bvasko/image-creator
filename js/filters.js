@@ -58,7 +58,6 @@ let ImageFilters = {
     /**
      * remove selected filter from filter value string
      */
-    //str.replace(/xmas/i, 'Christmas')
     const _modifiedVal = this.getFilterPropValue().replaceAll(`${filterType}`, '');
     // update filter var with new value
     display.style.setProperty(`--filter-type`, _modifiedVal);
@@ -74,12 +73,6 @@ let ImageFilters = {
   }
 };
 
-/**
- * When a filter icon is clicked:
- * - if the filter is not active, add an 'active' class
- * - add filter name to activeFilters array
- * - 
- */
 
 let FilterCards = {
   containerId: "FilterIcons",
@@ -100,10 +93,11 @@ let FilterCards = {
   }
 };
 
+/** Generate filter icons */
+FilterCards.generateFilterCard();
 /**
  * Attach event handlers
  */
-FilterCards.generateFilterCard();
 $(".card-image").on("click", function(event) {
   if ($(event.currentTarget.parentElement).hasClass("active")) {
     $(event.currentTarget.parentElement).removeClass("active")
@@ -114,33 +108,3 @@ $(".card-image").on("click", function(event) {
   $(event.currentTarget.parentElement).addClass("active");
   ImageFilters.applyFilter(event);
 });
-
- /**
-  * 
-  * DELETE THIS:
-  *        <div class="col s3 m1">
-            <div class="card">
-              <div data-filter="brightness(0.4)" class="card-image">
-                <img src="images/filter_sample_img.jpg">
-              </div>
-              <span class="card-title">Brightness</span>
-            </div>
-          </div>
-          <div class="col s3 m1">
-            <div class="card">
-              <div data-filter="grayscale(50%)" class="card-image">
-                <img src="images/filter_sample_img.jpg">
-              </div>
-              <span class="card-title">Grayscale</span>
-            </div>
-          </div>
-          <div class="col s3 m1">
-            <div class="card">
-              <div data-filter="invert(75%)" class="card-image">
-                <img src="images/filter_sample_img.jpg">
-              </div>
-              <span class="card-title">Invert</span>
-            </div>
-          </div>
-  * 
-  */
