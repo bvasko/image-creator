@@ -57,10 +57,19 @@ h1 {
 
 .filterIcons .card {
   cursor: pointer;
+  display: inline-block;
+  max-width: 80px;
+  margin-right: 12px;
+}
+
+.filterIcons .card.active {
+  border-bottom: 12px solid rgb(5, 170, 5);
 }
 
 .filterIcons .card-title {
   font-size: 1rem;
+  text-align: center;
+  display: block;
 }
 
 .giphyResults img{

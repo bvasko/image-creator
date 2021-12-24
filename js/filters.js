@@ -1,5 +1,6 @@
-let filterIcons = $(".card-image");
+
 let ImageFilters = {
+  imageContainer: '#image-container',
   filterOptions: {
     blur: {
       intensity: '',
@@ -8,8 +9,8 @@ let ImageFilters = {
     },
     brightness: {
       intensity: '',
-      unit: '%',
-      value: '100'
+      unit: '',
+      value: '3'
     },
     contrast: {
       intensity: '',
@@ -23,7 +24,7 @@ let ImageFilters = {
     },
     'hue-rotate': {
       intensity: '',
-      unit: ' ',
+      unit: 'deg',
       value: '100'
     },
     invert: {
@@ -47,25 +48,29 @@ let ImageFilters = {
       value: '100'
     },
   },
-  getActiveFilters: function() {
-    //return a list of elements that are active
-    return $('.filterIcons .active');
+  getFilterPropValue: function() {
+    const display = document.querySelector(this.imageContainer);
+    return display.style.getPropertyValue('--filter-type');
   },
-  getActiveFilterstype: function() {
+  removeFilter: function removeFilter(event) {
+    const display = document.querySelector(this.imageContainer);
+    const filterType = event.currentTarget.dataset.filter;
     /**
-     * loop through active filters
+     * remove selected filter from filter value string
      */
-    let filterStr = '';
-    return filterStr;
+    //str.replace(/xmas/i, 'Christmas')
+    const _modifiedVal = this.getFilterPropValue().replaceAll(`${filterType}`, '');
+    // update filter var with new value
+    display.style.setProperty(`--filter-type`, _modifiedVal);
   },
   applyFilter: function applyFilter(event) {
+    const display = document.querySelector(this.imageContainer);
     event.stopPropagation();
     event.stopImmediatePropagation();
-    const filterType = event.currentTarget.dataset.filter;
-    display = document.querySelector('#image-container');
+    const newFilterType = event.currentTarget.dataset.filter;
+    const _newVal = `${this.getFilterPropValue()} ${newFilterType}`;
     // update filter var with new value
-    display.style.setProperty(`--background-image-url`, backgroundUrl);
-    display.style.setProperty(`--filter-type`, filterType);
+    display.style.setProperty(`--filter-type`, _newVal);
   }
 };
 
@@ -80,18 +85,16 @@ let FilterCards = {
   containerId: "FilterIcons",
   generateFilterCard: function() {
     const filtersArr = Object.keys(ImageFilters.filterOptions);
-    console.log(filtersArr);
     filtersArr.forEach((keyName) => {
       const filterData = ImageFilters.filterOptions[keyName];
+      const filterStr = `${keyName}(${filterData.value}${filterData.unit})`;
       $(`#${this.containerId}`).append(
-        `<div class="col s4 m3">
-          <div class="card">
-            <div data-filter="${keyName}(${filterData.value}${filterData.unit})" class="card-image">
-              <img style="filter: ${keyName}(${filterData.value}${filterData.unit})" src="images/filter_sample_img.jpg"/>
+        `<div class="card">
+            <div data-filter="${filterStr}" class="card-image">
+              <img style="filter: ${filterStr}" src="images/filter_sample_img.jpg"/>
             </div>
             <span class="card-title">${keyName}</span>
-          </div>
-        </div>`
+          </div>`
       );
     });
   }
@@ -101,7 +104,16 @@ let FilterCards = {
  * Attach event handlers
  */
 FilterCards.generateFilterCard();
-filterIcons.on("click", ImageFilters.applyFilter);
+$(".card-image").on("click", function(event) {
+  if ($(event.currentTarget.parentElement).hasClass("active")) {
+    $(event.currentTarget.parentElement).removeClass("active")
+    ImageFilters.removeFilter(event);
+    return;
+  }
+  /* add active class to icon and apply filter to image */
+  $(event.currentTarget.parentElement).addClass("active");
+  ImageFilters.applyFilter(event);
+});
 
  /**
   * 
