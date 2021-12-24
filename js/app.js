@@ -44,7 +44,7 @@ function getApi(imgSearchVal) {
           image.src = selectedImg;
           // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
           imgDisplay = document.querySelector("#image-container");
-          imgDisplay.style.setProperty(`--background-image-url`, selectedImg);
+          imgDisplay.style.setProperty(`--background-image-url`, ` url("${selectedImg}")`);
           console.log(imgDisplay);
           
         })
@@ -68,7 +68,6 @@ let giphySearchResultsContainerEl = $(".giphyResultsContainer");
 let giphySearchResultsEl = $(".giphyResults");
 let giphySearchTermEl = $("#giphySearch");
 let imgContainerEl = $("#image-container .module-inside");
-let filterIcons = $(".card-image");
 
 
 function handleGiphySearch(event) {
@@ -197,4 +196,3 @@ function applyFilter(event) {
 }
 
 giphySearchEl.on("submit", handleGiphySearch);
-filterIcons.on("click", applyFilter);

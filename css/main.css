@@ -55,26 +55,21 @@ h1 {
   max-height: 100px;
 }
 
-/** filter sample images */
-
-[data-filter="blur"] {
-    -webkit-filter: blur(5px);
-            filter: blur(5px);
-}
-[data-filter="brightness"] {
-  filter: brightness(0.9);
-}
-[data-filter="grayscale"] {
-  -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-}
-[data-filter="invert"] {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
-}
-
 .filterIcons .card {
   cursor: pointer;
+  display: inline-block;
+  max-width: 80px;
+  margin-right: 12px;
+}
+
+.filterIcons .card.active {
+  border-bottom: 12px solid rgb(5, 170, 5);
+}
+
+.filterIcons .card-title {
+  font-size: 1rem;
+  text-align: center;
+  display: block;
 }
 
 .giphyResults img{

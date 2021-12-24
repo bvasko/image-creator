@@ -36,6 +36,17 @@
         <!-- The main image container goes over here -->
         <div id="image-container">
           <div class="module-inside"></div>
+              <!-- image filter section -->
+        </div>
+        <div class="section">
+          <h5>Apply Filters</h5>
+          <div id="FilterIcons" class="scrollMenu filterIcons row"></div> <!-- close row -->
+          <form action="#">
+            <h5>Adjust Filter intensity</h5>
+            <p class="range-field">
+              <input type="range" id="test5" min="0" max="100" />
+            </p>
+          </form>
         </div>
       </div>
       <div class="col s6">
@@ -57,7 +68,6 @@
             <div class="row">
               <section class="scrollMenu" id="image"></section>
             </div>
-
           </div>
         </div>
    
@@ -85,52 +95,13 @@
        
       </div>
     </div>
-    <!-- image filter section -->
-    <div class="row">
-      <div class="section">
-        <h5>Apply Filters</h5>
-        <div class="filterIcons row">
-          <div class="col s3 m1">
-            <div class="card">
-              <div class="card-image">
-                <img data-filter="blur(5px)" src="images/filter_sample_img.jpg">
-                <span class="card-title">Blur</span>
-              </div>
-            </div>
-          </div>
-          <div class="col s3 m1">
-            <div class="card">
-              <div class="card-image">
-                <img data-filter="brightness(0.4)" src="images/filter_sample_img.jpg">
-                <span class="card-title">Brightness</span>
-              </div>
-            </div>
-          </div>
-          <div class="col s3 m1">
-            <div class="card">
-              <div class="card-image">
-                <img data-filter="grayscale(50%)" src="images/filter_sample_img.jpg">
-                <span class="card-title">Grayscale</span>
-              </div>
-            </div>
-          </div>
-          <div class="col s3 m1">
-            <div class="card">
-              <div class="card-image">
-                <img data-filter="invert(75%)" src="images/filter_sample_img.jpg">
-                <span class="card-title">Invert</span>
-              </div>
-            </div>
-          </div>
-        </div> <!-- close row -->
-      </div>
-    </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/filters.js"></script>
 
 </body>
 
