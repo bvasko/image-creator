@@ -1,116 +1,116 @@
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
-  <head>
-    <meta charset="utf-8" />
-    <title>Social Media Image Creator</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>Social Media Image Creator</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="og:title" content="" />
-    <meta property="og:type" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
 
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="icon.png" />
-    <link rel="stylesheet" href="css/materialize.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.png" />
+  <link rel="stylesheet" href="css/materialize.min.css" />
+  
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
 
-  <body>
-    <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <header>
-            <h1>Social Media Image Creator</h1>
-          </header>
-        </div>
+<body>
+  <!-- Add your site or application content here -->
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <header>
+          <h1>Social Media Image Creator</h1>
+        </header>
       </div>
-      <div class="row">
-        <div class="col s6">
-          <!-- The main image container goes over here -->
-          <div id="image-container">
-            <div class="module-inside"></div>
-          </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <!-- The main image container goes over here -->
+        <div id="image-container">
+          <div class="module-inside"></div>
+              <!-- image filter section -->
         </div>
-        <div class="col s6">
-          <!-- The image customization controls will go on this side -->
-          <div class="section">
-            <h5>Choose your image</h5>
-            <!--img-search-->
-            <form class="input-field col s12" id="imgForm">
-              <input id="img-search" type="text">
-              <label for="img-search">Image Search</label>
-              <!--img-search-btn-->
-              <button class="btn waves-effect waves-light" type="submit">Search
-                <i class="material-icons right"></i>
-              </button>
-
-              <!-- Modal Structure -->
-              <div id="imgSearch-modal" class="modal">
-                <div class="modal-content">
-                  <h4 class="center-align">Please enter a search term!</h4>
-                </div>
-                <div class="modal-footer">
-                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-                </div>
-              </div>
-            </form>
-            <!--search results-->
-            <div class="imgSearchResultsContainer">
-              <h5>Search Results: <span id=""></span></h5>
-              <div class="row">
-                <section class="scrollMenu" id="image"></section>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- section for giphy search api -->
-          <div class="divider"></div>
-          <div class="section">
-            <h5>Search for stickers</h5>
-            <form class="giphyForm">
-              <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
-              <button type="submit" class="btn waves-effect waves-light">
-                Search
-              </button>
-            </form>
-            <div class="giphyResultsContainer">
-              <h5>Search Results for: <span id="giphySearch"></span></h5>
-              <section class="giphyResults scrollMenu">
-              </section>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="section">
-            <h5>Add Text</h5>
-            <p>[input text box]</p>
-          </div>
-
-        </div>
-      </div>
-      <!-- image filter section -->
-      <div class="row">
         <div class="section">
           <h5>Apply Filters</h5>
-          <div class="filterIcons row">
-            <div class="col s3 m1">
-              <div class="card">
-                <div class="card-image">
-                  <img data-filter="blur(5px)" src="images/filter_sample_img.jpg">
-                  <span class="card-title">Blur</span>
-                </div>
-              </div>
+          <div id="FilterIcons" class="scrollMenu filterIcons row"></div> <!-- close row -->
+          
+            <h5>Adjust Filter intensity</h5>
+            <form action="#">
+            <div class="flex-container">
+              <select id="filterNameSelect" class="browser-default"></select>
+              <div id="displayIntensity"></div>
             </div>
-            <div class="col s3 m1">
-              <div class="card">
-                <div class="card-image">
+            <p class="range-field">
+              <input type="range" id="intensityVal" min="0" max="100" />
+            </p>
+          </form>
+        </div>
+      </div>
+      <div class="col s6">
+        <!-- The image customization controls will go on this side -->
+        <div class="section">
+          <h5>Choose your image</h5>
+          <!--img-search-->
+          <form class="input-field col s12" id="imgForm">
+            <input id="img-search" type="text">
+            <label for="img-search">Image Search</label>
+            <!--img-search-btn-->
+            <button class="btn waves-effect waves-light" type="submit">Search
+              <i class="material-icons right"></i>
+            </button>
+          </form>
+          <!--search results-->
+          <div class="imgSearchResultsContainer">
+            <h5>Search Results: <span id=""></span></h5>
+            <div class="row">
+              <section class="scrollMenu" id="image"></section>
+            </div>
+          </div>
+        </div>
+   
+        <!-- section for giphy search api -->
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Search for stickers</h5>
+          <form class="giphyForm">
+            <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
+            <button type="submit" class="btn waves-effect waves-light">
+              Search
+            </button>
+          </form>
+          <div class="giphyResultsContainer">
+            <h5>Search Results for: <span id="giphySearch"></span></h5>
+            <section class="giphyResults scrollMenu">
+            </section>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>Add Text</h5>
+          <p>[input text box]</p>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/filters.js"></script>
+
+</body>
+
+</html>         <div class="card-image">
                   <img data-filter="brightness(0.4)" src="images/filter_sample_img.jpg">
                   <span class="card-title">Brightness</span>
                 </div>
