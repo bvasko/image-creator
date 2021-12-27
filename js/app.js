@@ -49,16 +49,20 @@ function getApi(imgSearchVal) {
           console.log(image);
           image.src = selectedImg;
           // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
-          imgDisplay = document.querySelector("#image-container");
-          imgDisplay.style.setProperty(`--background-image-url`, ` url("${selectedImg}")`);
+          imgDisplay = document.querySelector("#image-container").style;
+          imgDisplay.setProperty(
+            "--background-image-url",
+            "url('" + selectedImg + "')"
+          );
           console.log(imgDisplay);
         });
         imgSearchResultsEl.append(img);
       }
     });
 }
-imgSearchEl.addEventListener('submit', formSubmitHandler);
+imgSearchEl.addEventListener("submit", formSubmitHandler);
 
+//////////////////////////////////////////////////////////////////////////////
 
 let giphyKey = "bAqrGC0EFBsitN09IxRQsJdQPme35o1E";
 let tenorKey = "6FGOA1MVEPK6";
