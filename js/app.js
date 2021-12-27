@@ -49,20 +49,16 @@ function getApi(imgSearchVal) {
           console.log(image);
           image.src = selectedImg;
           // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
-          imgDisplay = document.querySelector("#image-container").style;
-          imgDisplay.setProperty(
-            "--background-image-url",
-            "url('" + selectedImg + "')"
-          );
+          imgDisplay = document.querySelector("#image-container");
+          imgDisplay.style.setProperty(`--background-image-url`, ` url("${selectedImg}")`);
           console.log(imgDisplay);
         });
         imgSearchResultsEl.append(img);
       }
     });
 }
-imgSearchEl.addEventListener("submit", formSubmitHandler);
+imgSearchEl.addEventListener('submit', formSubmitHandler);
 
-//////////////////////////////////////////////////////////////////////////////
 
 let giphyKey = "bAqrGC0EFBsitN09IxRQsJdQPme35o1E";
 let tenorKey = "6FGOA1MVEPK6";
@@ -72,7 +68,6 @@ let giphySearchResultsContainerEl = $(".giphyResultsContainer");
 let giphySearchResultsEl = $(".giphyResults");
 let giphySearchTermEl = $("#giphySearch");
 let imgContainerEl = $("#image-container .module-inside");
-let filterIcons = $(".card-image");
 
 function handleGiphySearch(event) {
   event.preventDefault();
@@ -84,7 +79,6 @@ function handleGiphySearch(event) {
   giphySearchResultsEl.empty();
   giphySearchTermEl.text("");
   giphySearchInputEl.val("");
-  //   giphySearchTermEl.text(stickerSearch);
   giphyStickerSearch(stickerSearch);
 }
 
@@ -94,15 +88,8 @@ function giphyStickerSearch(search) {
   console.log(searchVal);
   giphySearchTermEl.text(searchVal);
 
-  let giphyAPIUrl =
-    "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q=" +
-    search +
-    "&limit=5&offset=0&rating=g&lang=en&bundlde=fixed_width_small";
-  // let giphyAPIUrl = "https://g.tenor.com/v1/search?q=" + search+ "&" + tenorKey+  "&limit=5&contentfitler=high&media_filter=minimal";
-
-  // "https://api.giphy.com/v1/stickers/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q=" +
-  // search +
-  // "&offset=0&rating=g&lang=en";
+    let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search
+    +"&limit=5&offset=0&rating=g&lang=en&bundle=fixed_width_small";
 
   fetch(giphyAPIUrl)
     .then(function (response) {
@@ -142,15 +129,65 @@ function getStickers(stickers) {
   }
 }
 
-function pasteSticker(event) {
-  event.preventDefault();
-  console.log($(this));
-  let customizableSticker = $(this);
-  customizableSticker.clone().appendTo(imgContainerEl);
+function pasteSticker(event){
+    event.preventDefault();
+    console.log($(this));
+    let customizableSticker = $(this).clone();
+    customizableSticker.addClass("draggable");
+    customizableSticker.appendTo(imgContainerEl);
 }
 
-function positionSticker() {}
 
+const restrictParent = interact.modifiers.restrictRect({
+        restriction: "#image-container",
+        // endOnly: true
+});
+
+interact('.draggable').draggable({
+    maxPerElement: Infinity,
+    modifiers: [restrictParent],
+    listeners: {
+      start (event) {
+        console.log(event.type, event.target)
+      }
+    ,
+      move (event) {
+        let {x,y} = event.target.dataset;
+              x= (parseFloat(x) || 0) + event.dx;
+              y = (parseFloat(y) || 0) + event.dy;
+              Object.assign(event.target.style.transform =`translate(${x}px, ${y}px)`)
+              Object.assign(event.target.dataset, {x,y})
+        },
+      end (event){
+        console.log(event.type);
+      }
+    }
+})
+    
+
+
+  interact(".draggable").resizable({
+      edges: {top: true, left: true, bottom: true, right: true},
+      modifiers: [restrictParent],
+      listeners: {
+          move (event){
+              let {a,b} = event.target.dataset;
+              a= (parseFloat(a) || 0) + event.deltaRect.right;
+              b = (parseFloat(b) || 0) + event.deltaRect.top;
+              Object.assign(event.target.style, {
+                  width: `${event.rect.width}px`,
+                  height: `${event.rect.height}px`,
+              })
+              Object.assign(event.target.dataset, { a, b })
+          }
+      }
+  })
+
+
+
+function removeSticker(){
+    //TODO button under img container to remove a selected sticker
+}
 function applyFilter(event) {
   event.stopPropagation();
   event.stopImmediatePropagation();
@@ -160,4 +197,3 @@ function applyFilter(event) {
 }
 
 giphySearchEl.on("submit", handleGiphySearch);
-filterIcons.on("click", applyFilter);
