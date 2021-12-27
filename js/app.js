@@ -1,7 +1,9 @@
 var imgSearchEl = document.querySelector("#imgForm");
 var imgSearchInputEl = document.querySelector("#img-search");
 
-var imgSearchResultsContainer = document.querySelector(".imgSearchResultsContainer");
+var imgSearchResultsContainer = document.querySelector(
+  ".imgSearchResultsContainer"
+);
 var imgSearchResultsEl = document.querySelector("#image");
 
 var formSubmitHandler = function (event) {
@@ -11,24 +13,28 @@ var formSubmitHandler = function (event) {
   console.log(imgSearchVal);
   if (imgSearchVal) {
     getApi(imgSearchVal);
-    imgSearchInputEl.value = '';
+    imgSearchInputEl.value = "";
   } else {
-    //TODO: change this to a modal
-    alert('Please enter a search term');
+    $("#imgSearch-modal").modal({});
+    $("#imgSearch-modal").modal("open");
   }
-
 };
 
 function getApi(imgSearchVal) {
   var accessKey = "EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI";
-  var requestUrl = "https://api.unsplash.com/search/photos?query=" + imgSearchVal + "&orientation=squarish&content_filter=high&client_id=" + accessKey + "&fm=jpg"
+  var requestUrl =
+    "https://api.unsplash.com/search/photos?query=" +
+    imgSearchVal +
+    "&orientation=squarish&content_filter=high&client_id=" +
+    accessKey +
+    "&fm=jpg";
 
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
+      console.log(data);
 
       for (let i = 0; i < 9; i++) {
         const img = document.createElement("img");
@@ -46,16 +52,10 @@ function getApi(imgSearchVal) {
           imgDisplay = document.querySelector("#image-container");
           imgDisplay.style.setProperty(`--background-image-url`, ` url("${selectedImg}")`);
           console.log(imgDisplay);
-          
-        })
+        });
         imgSearchResultsEl.append(img);
       }
-
-
-
-
     });
-    
 }
 imgSearchEl.addEventListener('submit', formSubmitHandler);
 
@@ -68,7 +68,6 @@ let giphySearchResultsContainerEl = $(".giphyResultsContainer");
 let giphySearchResultsEl = $(".giphyResults");
 let giphySearchTermEl = $("#giphySearch");
 let imgContainerEl = $("#image-container .module-inside");
-
 
 function handleGiphySearch(event) {
   event.preventDefault();
@@ -105,8 +104,7 @@ function giphyStickerSearch(search) {
       if (data.data.length == 0) {
         giphySearchTermEl.text("No results found for: " + search);
         console.log(data);
-      }
-      else {
+      } else {
         getStickers(data);
       }
     })
@@ -115,14 +113,17 @@ function giphyStickerSearch(search) {
     });
 }
 
-
 function getStickers(stickers) {
   let sticker = stickers.data;
   console.log(sticker[0].title);
   for (i = 0; i < sticker.length; i++) {
     let imageUrl = sticker[i].images.fixed_height_small.url;
     let imageAlt = sticker[i].title;
-    let imageEl = $("<img>").attr({ "src": imageUrl, "alt": imageAlt, "title": imageAlt });
+    let imageEl = $("<img>").attr({
+      src: imageUrl,
+      alt: imageAlt,
+      title: imageAlt,
+    });
     imageEl.on("click", pasteSticker);
     giphySearchResultsEl.append(imageEl);
   }
@@ -191,7 +192,7 @@ function applyFilter(event) {
   event.stopPropagation();
   event.stopImmediatePropagation();
   const filterType = event.currentTarget.firstElementChild.dataset.filter;
-  display = document.querySelector('#image-container');
+  display = document.querySelector("#image-container");
   display.style.setProperty(`--filter-type`, `${filterType}`);
 }
 
