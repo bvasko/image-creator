@@ -15,8 +15,20 @@ body {
 Note to devs:
 set font sizes in rems to scale relative to the body font-size 
 */
-
+header {
+  position: sticky;
+  margin-bottom: 8px;
+  top: 0;
+  background-color: #CF1010;
+  width: 100%;
+  padding: 7px 0;
+  z-index: 3;
+  box-shadow: 5px 3px 10px rgba(0, 0, 0, .5);
+  white-space: nowrap;
+}
 h1 {
+  color: #FFF;
+  font-family: 'Pushster', cursive;
   font-size: 2.6rem;
   margin: 24px;
 }
