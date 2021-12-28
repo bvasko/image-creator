@@ -113,3 +113,56 @@ h1 {
   max-height: 100%;
   min-height: 100%;
 }
+
+.sidenav-overlay {
+  background-color: rgba(0,0,0,0);
+}
+
+.sidenav {
+  width: 47%;
+}
+
+ ul.main-nav li {
+  padding: 24px;
+  border: 1px solid rgb(211, 211, 211);
+  display: block;
+}
+
+ul.main-nav li a {
+  color: rgb(119, 119, 119);
+  display: inline-block;
+  line-height: 2rem;
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+}
+ul.main-nav li a:hover {
+  color: #CF1010;
+}
+ul.main-nav li a i {
+  font-size: inherit;
+  margin-right: 12px;
+  line-height: inherit;
+}
+
+.sidenav .title {
+  line-height: 2rem;
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sidenav li.search {
+  padding: 32px 32px 0;
+}
+
+h5 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+}
+
+.sidenav li.search .row {
+  margin-left: 0px;
+}
+
+.input-field > label {
+  top: -1rem;
+}
