@@ -84,13 +84,6 @@ h1 {
   display: block;
 }
 
-#filterNameSelect {
-  width: 80%;
-  border: 1px solid rgb(209, 209, 209);
-}
-.flex-container {
-  display: flex;
-}
 .giphyResults img{
   cursor: pointer;
 }
