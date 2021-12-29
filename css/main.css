@@ -15,6 +15,23 @@ body {
 Note to devs:
 set font sizes in rems to scale relative to the body font-size 
 */
+header {
+  position: sticky;
+  margin-bottom: 8px;
+  top: 0;
+  background-color: #CF1010;
+  width: 100%;
+  padding: 7px 0;
+  z-index: 3;
+  box-shadow: 5px 3px 10px rgba(0, 0, 0, .5);
+  white-space: nowrap;
+}
+h1 {
+  color: #FFF;
+  font-family: 'Pushster', cursive;
+  font-size: 2.6rem;
+  margin: 24px;
+}
 
 .container {
   width: 90%;
@@ -48,26 +65,21 @@ set font sizes in rems to scale relative to the body font-size
   text-align: center;
 }
 
-/** filter sample images */
-
-[data-filter="blur"] {
-    -webkit-filter: blur(5px);
-            filter: blur(5px);
-}
-[data-filter="brightness"] {
-  filter: brightness(0.9);
-}
-[data-filter="grayscale"] {
-  -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-}
-[data-filter="invert"] {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
-}
-
 .filterIcons .card {
   cursor: pointer;
+  display: inline-block;
+  max-width: 80px;
+  margin-right: 12px;
+}
+
+.filterIcons .card.active {
+  border-bottom: 12px solid rgb(5, 170, 5);
+}
+
+.filterIcons .card-title {
+  font-size: 1rem;
+  text-align: center;
+  display: block;
 }
 
 .giphyResults img{
