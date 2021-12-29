@@ -1,12 +1,12 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.sidenav');
-  var instances = M.Sidenav.init(elems, options);
-});
-$(document).ready(function(){
-  $('.sidenav').sidenav();
-});
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
 var imgSearchEl = document.querySelector("#imgForm");
 var imgSearchInputEl = document.querySelector("#img-search");
 
@@ -151,11 +151,13 @@ function pasteSticker(event){
 }
 
 
-const restrictParent = interact.modifiers.restrictRect({
+let restrictParent = interact.modifiers.restrictRect({
         restriction: "#image-container",
+        elementRect: { left: 0, right: 1, top: 0, bottom: 1 },
+        // preserveAspectRatio: true,
         // endOnly: true
 });
-
+let coord = {l: 0, t: 0, r: 0, b: 0};
 interact('.draggable').draggable({
     maxPerElement: Infinity,
     modifiers: [restrictParent],
@@ -170,8 +172,14 @@ interact('.draggable').draggable({
               y = (parseFloat(y) || 0) + event.dy;
               Object.assign(event.target.style.transform =`translate(${x}px, ${y}px)`)
               Object.assign(event.target.dataset, {x,y})
+              coord.l =x;
+              coord.t =y;
+              coord.r= x+ event.target.width;
+              coord.b= x+ event.target.height;
+
         },
       end (event){
+        console.log(coord);
         console.log(event.type);
       }
     }
@@ -181,17 +189,29 @@ interact('.draggable').draggable({
 
   interact(".draggable").resizable({
       edges: {top: true, left: true, bottom: true, right: true},
-      modifiers: [restrictParent],
+      modifiers: [interact.modifiers.aspectRatio({
+          ratio: 'preserve',
+      
+          modifiers: [restrictParent],
+      })
+    ],
       listeners: {
           move (event){
-              let {a,b} = event.target.dataset;
-              a= (parseFloat(a) || 0) + event.deltaRect.right;
-              b = (parseFloat(b) || 0) + event.deltaRect.top;
+                // modifiers: [restrictParent];
+              let {x, y} = event.target.dataset;
+              x = (parseFloat(x) || 0) + event.deltaRect.left;
+              y = (parseFloat(y) || 0) + event.deltaRect.top;
+            //   c = a + event.deltaRect.right;
+            //   d = b + event.deltaRect.bottom;
               Object.assign(event.target.style, {
                   width: `${event.rect.width}px`,
                   height: `${event.rect.height}px`,
+                  webkitTransform : `translate(${x}px, ${y}px)`,
+                  transform: `translate(${x}px, ${y}px)`
+
               })
-              Object.assign(event.target.dataset, { a, b })
+              console.log(event.edges);
+              Object.assign(event.target.dataset, {x, y})
           }
       }
   })
