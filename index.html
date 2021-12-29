@@ -16,91 +16,138 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pushster&display=swap" rel="stylesheet"> 
-<link rel="stylesheet" href="css/reset.css" />  
-<link rel="stylesheet" href="css/materialize.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pushster&family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/materialize.min.css" />
   <link rel="stylesheet" href="css/main.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+  <header>
+    <h1>Social Media Image Creator</h1>
+  </header>
   <!-- Add your site or application content here -->
   <div class="container">
     <div class="row">
-      <div class="col s12">
-        <header>
-          <h1>Social Media Image Creator</h1>
-        </header>
+      <div class="col s6">
+        <!-- The image customization controls will go on this side -->
+
+        <ul id="image-search" class="sidenav">
+          <li>
+            <div class="user-view">
+              <div class="title">
+                <i class="material-icons sidenav-close">arrow_back</i>
+                Photo Search
+              </div>
+            </div>
+          </li>
+          <li class="search">
+
+            <form class="input-field col s12" id="imgForm">
+              <input id="img-search" type="text">
+              <label for="img-search">Image Search</label>
+              <!--img-search-btn-->
+              <button class="btn waves-effect waves-light red" type="submit">Search
+                <i class="material-icons right"></i>
+              </button>
+            </form>
+          </li>
+          <li class="search">
+            <!--search results-->
+            <div class="imgSearchResultsContainer">
+              <h5>Search Results: <span id=""></span></h5>
+              <div class="row">
+                <section class="scrollMenu" id="image"></section>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul id="sticker-search" class="sidenav">
+          <li>
+            <div class="user-view">
+              <div class="title">
+                <i class="material-icons sidenav-close">arrow_back</i>
+                Sticker Search
+              </div>
+          </li>
+          <li class="search">
+            <form class="giphyForm">
+              <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
+              <button type="submit" class="btn waves-effect waves-light">
+                Search
+              </button>
+            </form>
+            <div class="giphyResultsContainer">
+              <h5>Search Results for: <span id="giphySearch"></span></h5>
+              <section class="giphyResults scrollMenu">
+              </section>
+            </div>
+          </li>
+        </ul>
+        <ul id="filter-menu" class="sidenav">
+          <li>
+            <div class="user-view">
+              <div class="title">
+                <i class="material-icons sidenav-close">arrow_back</i>
+                Image Filters
+              </div>
+          </li>
+          <li class="search">
+            <div id="FilterIcons" class="scrollMenu filterIcons row"></div> <!-- close row -->
+          </li>
+          <li>
+            <form action="#">
+              <div class="flex-container">
+                <select id="filterNameSelect" class="browser-default"></select>
+                <div id="displayIntensity"></div>
+              </div>
+              <p class="range-field">
+                <input type="range" id="intensityVal" min="0" max="100" />
+              </p>
+            </form>
+          </li>
+        </ul>
+        <ul id="text-menu" class="sidenav">
+          <li>
+            <div class="user-view">
+              <div class="title">
+                <i class="material-icons sidenav-close">arrow_back</i>
+                Add Text
+              </div>
+          </li>
+        </ul>
+        <ul class="main-nav">
+          <li>
+            <a href="#" data-target="image-search" class="sidenav-trigger">
+              <i class="material-icons">image</i>Main Image</a>
+          </li>
+          <li>
+            <a href="#" data-target="filter-menu" class="sidenav-trigger">
+              <i class="material-icons">filter_vintage</i>Filters</a>
+          </li>
+          <li>
+            <a href="#" data-target="sticker-search" class="sidenav-trigger">
+              <i class="material-icons">insert_emoticon</i>Stickers</a>
+          </li>
+          <li>
+            <a href="#" data-target="text-menu" class="sidenav-trigger">
+              <i class="material-icons">text_fields</i>Text</a>
+          </li>
+        </ul>
+
+
       </div>
-    </div>
-    <div class="row">
       <div class="col s6">
         <!-- The main image container goes over here -->
         <div id="image-container">
           <div class="module-inside"></div>
-              <!-- image filter section -->
+          <!-- image filter section -->
         </div>
-        <div class="section">
-          <h5>Apply Filters</h5>
-          <div id="FilterIcons" class="scrollMenu filterIcons row"></div> <!-- close row -->
-          
-            <h5>Adjust Filter intensity</h5>
-            <form action="#">
-            <div class="flex-container">
-              <select id="filterNameSelect" class="browser-default"></select>
-              <div id="displayIntensity"></div>
-            </div>
-            <p class="range-field">
-              <input type="range" id="intensityVal" min="0" max="100" />
-            </p>
-          </form>
-        </div>
+
       </div>
-      <div class="col s6">
-        <!-- The image customization controls will go on this side -->
-        <div class="section">
-          <h5>Choose your image</h5>
-          <!--img-search-->
-          <form class="input-field col s12" id="imgForm">
-            <input id="img-search" type="text">
-            <label for="img-search">Image Search</label>
-            <!--img-search-btn-->
-            <button class="btn waves-effect waves-light" type="submit">Search
-              <i class="material-icons right"></i>
-            </button>
-          </form>
-          <!--search results-->
-          <div class="imgSearchResultsContainer">
-            <h5>Search Results: <span id=""></span></h5>
-            <div class="row">
-              <section class="scrollMenu" id="image"></section>
-            </div>
-          </div>
-        </div>
-   
-        <!-- section for giphy search api -->
-        <div class="divider"></div>
-        <div class="section">
-          <h5>Search for stickers</h5>
-          <form class="giphyForm">
-            <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
-            <button type="submit" class="btn waves-effect waves-light">
-              Search
-            </button>
-          </form>
-          <div class="giphyResultsContainer">
-            <h5>Search Results for: <span id="giphySearch"></span></h5>
-            <section class="giphyResults scrollMenu">
-            </section>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <div class="section">
-          <h5>Add Text</h5>
-          <p>[input text box]</p>
-        </div>
-       
-      </div>
+
     </div>
   </div>
 
