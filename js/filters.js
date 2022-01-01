@@ -5,53 +5,68 @@ let ImageFilters = {
     blur: {
       intensity: '',
       unit: 'px',
-      value: '3'
+      value: '3',
+      min: 0,
+      max: 10
     },
     brightness: {
       intensity: '',
       unit: '',
-      value: '3'
+      value: '3',
+      min: 0,
+      max: 100
     },
     contrast: {
       intensity: '',
       unit: '%',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 200
     },
     grayscale: {
       intensity: '',
       unit: '%',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 100
     },
     'hue-rotate': {
       intensity: '',
       unit: 'deg',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 100
     },
     invert: {
       intensity: '',
       unit: '%',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 100
     },
     opacity: {
       intensity: '',
       unit: '%',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 100
     },
     saturate: {
       intensity: '',
       unit: '%',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 200
     },
     sepia: {
       intensity: '',
       unit: '%',
-      value: '100'
+      value: '100',
+      min: 0,
+      max: 100
     },
   },
-  getFilterPropValue: function() {
-    const display = document.querySelector(this.imageContainer);
-    return display.style.getPropertyValue('--filter-type');
-  },
+  filterSettings: {},
   removeFilter: function removeFilter(event) {
     const display = document.querySelector(this.imageContainer);
     const filterType = event.currentTarget.dataset.filter;
@@ -62,14 +77,39 @@ let ImageFilters = {
     // update filter var with new value
     display.style.setProperty(`--filter-type`, _modifiedVal);
   },
+  updateFilterPropsValue: function(display, filterName, newFilter) {
+    const imageFilter = display.style.getPropertyValue('--filter-type');
+    if (!imageFilter) return newFilter;
+    //if there is a current filter setting, update the setting
+    this.filterSettings[filterName] = newFilter;
+    let filterStr = '';
+    Object.keys(this.filterSettings).forEach(key => {
+      const str = this.filterSettings[key];
+      filterStr = filterStr + " " + str;
+    });
+    // create a string of the filter values
+    return filterStr;
+  },
   applyFilter: function applyFilter(event) {
+    // on change apply filter to image
+    // get image element
     const display = document.querySelector(this.imageContainer);
+    const filterName = event.target.dataset.filter;
+    const filterData = this.filterOptions[filterName];
     event.stopPropagation();
     event.stopImmediatePropagation();
-    const newFilterType = event.currentTarget.dataset.filter;
-    const _newVal = `${this.getFilterPropValue()} ${newFilterType}`;
+    let val;
+    if (filterName === 'brightness') {
+      val = event.currentTarget.value * .1;
+    } else {
+      val = event.currentTarget.value;
+    }
+    const filterPropStr = `${filterName}(${val}${filterData.unit})`;
+    const updated = this.updateFilterPropsValue(display, filterName, filterPropStr)
+    console.log('new filterPropStr', updated);
+    display.style.setProperty(`--filter-type`, updated);
     // update filter var with new value
-    display.style.setProperty(`--filter-type`, _newVal);
+    // display.style.setProperty(`--filter-type`, _newFilter);
   }
 };
 
@@ -80,14 +120,15 @@ let FilterCards = {
     const filtersArr = Object.keys(ImageFilters.filterOptions);
     filtersArr.forEach((keyName) => {
       const filterData = ImageFilters.filterOptions[keyName];
-      const filterStr = `${keyName}(${filterData.value}${filterData.unit})`;
+      const filterStr = `${keyName}`;
+      const rangeId = `${keyName}`;
       $(`#${this.containerId}`).append(
-        `<div class="card">
-            <div data-filter="${filterStr}" class="card-image">
-              <img style="filter: ${filterStr}" src="images/filter_sample_img.jpg"/>
-            </div>
+        `<li class="filter-setting">
             <span class="card-title">${keyName}</span>
-          </div>`
+            <p class="range-field">
+            <input data-filter="${filterStr}" class="filterInput" type="range" id="${rangeId}" min="${filterData.min}" max="${filterData.max}" />
+            </p>
+        </li>`
       );
     });
   }
@@ -98,13 +139,7 @@ FilterCards.generateFilterCard();
 /**
  * Attach event handlers
  */
-$(".card-image").on("click", function(event) {
-  if ($(event.currentTarget.parentElement).hasClass("active")) {
-    $(event.currentTarget.parentElement).removeClass("active")
-    ImageFilters.removeFilter(event);
-    return;
-  }
-  /* add active class to icon and apply filter to image */
-  $(event.currentTarget.parentElement).addClass("active");
-  ImageFilters.applyFilter(event);
+
+ $(document).on('input', '.filterInput', function(event) {
+   ImageFilters.applyFilter(event);
 });
