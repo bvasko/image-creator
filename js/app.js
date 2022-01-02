@@ -175,12 +175,13 @@ interact('.draggable').draggable({
               coord.l =x;
               coord.t =y;
               coord.r= x+ event.target.width;
-              coord.b= x+ event.target.height;
+              coord.b= y+ event.target.height;
 
         },
       end (event){
         console.log(coord);
         console.log(event.type);
+        return coord;
       }
     }
 })
@@ -190,27 +191,27 @@ interact('.draggable').draggable({
   interact(".draggable").resizable({
       edges: {top: true, left: true, bottom: true, right: true},
       modifiers: [interact.modifiers.aspectRatio({
-          ratio: 'preserve',
+          equalDelta: true,
       
           modifiers: [restrictParent],
       })
     ],
       listeners: {
           move (event){
-                // modifiers: [restrictParent];
               let {x, y} = event.target.dataset;
               x = (parseFloat(x) || 0) + event.deltaRect.left;
               y = (parseFloat(y) || 0) + event.deltaRect.top;
-            //   c = a + event.deltaRect.right;
-            //   d = b + event.deltaRect.bottom;
+              c = x + event.rect.width;
+              d = y + event.rect.height;
+            //   console.log(x,y,c,d);
               Object.assign(event.target.style, {
                   width: `${event.rect.width}px`,
                   height: `${event.rect.height}px`,
                   webkitTransform : `translate(${x}px, ${y}px)`,
                   transform: `translate(${x}px, ${y}px)`
+                  
 
               })
-            //   console.log(event.edges);
               Object.assign(event.target.dataset, {x, y})
           }
       }
@@ -221,14 +222,12 @@ interact('.draggable').draggable({
       let removedItem = event.target;
       removedItem.remove();
   })
-// $(".draggable").on("doubletap",function(event){
-//     console.log(this);
-// })
 
-function removeSticker(){
-    //TODO button under img container to remove a selected sticker
+
+// function removeSticker(){
+//     //TODO button under img container to remove a selected sticker
     
-}
+// }
 function applyFilter(event) {
   event.stopPropagation();
   event.stopImmediatePropagation();
