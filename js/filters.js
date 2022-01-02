@@ -106,7 +106,6 @@ let ImageFilters = {
     }
     const filterPropStr = `${filterName}(${val}${filterData.unit})`;
     const updated = this.updateFilterPropsValue(display, filterName, filterPropStr)
-    console.log('new filterPropStr', updated);
     display.style.setProperty(`--filter-type`, updated);
     // update filter var with new value
     // display.style.setProperty(`--filter-type`, _newFilter);
