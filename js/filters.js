@@ -142,3 +142,15 @@ FilterCards.generateFilterCard();
  $(document).on('input', '.filterInput', function(event) {
    ImageFilters.applyFilter(event);
 });
+$("#saveFilterForm").on('click', function(e) {
+  const savedFilters = JSON.parse(localStorage.getProperty('myFilters')) || [];
+  const filterSettings = ImageFilters.filterSettings;
+  const name = $('#filter_name_input').val;
+  const f = JSON.stringify({
+    name,
+    filterSettings
+  });
+  savedFilters.push(f);
+  localStorage.setProperty('myFilters')
+});
+$("#saveFilterModal").modal({});

@@ -92,8 +92,11 @@
                 Image Filters
               </div>
               <div class="save-btn">
-                <i class="material-icons">save</i>
-                Save Filter
+                 <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn modal-trigger" href="#saveFilterModal">
+                  <i class="material-icons">save</i>
+                  Save Filter
+                </a>
               </div>
           </li>
           <li class="search">
@@ -158,6 +161,22 @@
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+  <div id="saveFilterModal" class="modal">
+    <div class="modal-content">
+      <h4>Enter Filter Name</h4>
+      <div class="container">
+        <div class="row">
+          <div class="input-field col s6">
+            <input value="Alvin" id="filter_name_input" type="text" class="validate">
+            <label class="active" for="filter_name_input">Filter Name</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="saveFilterForm" class="modal-close waves-effect waves-green btn-flat">Save</a>
     </div>
   </div>
 

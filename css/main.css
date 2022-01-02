@@ -201,3 +201,10 @@ h5 {
     display: block;
     float: left;
   }
+
+  #saveFilterModal .container {
+    padding-top: 32px;
+    margin-top: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
