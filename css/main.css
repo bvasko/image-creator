@@ -36,7 +36,10 @@ h1 {
 .container {
   width: 90%;
 }
-
+#trash{
+  height:100vmax;
+  margin-top: 0px;
+}
 #image-container {
   aspect-ratio: 1 / 1;
   width: 100%;
@@ -46,7 +49,31 @@ h1 {
 .draggable img{
   cursor: move;
   overflow: hidden;
+  /* position: relative; */
 
+}
+.imgHandle{
+  /* max-height: 100px;
+  max-width: 100px; */
+}
+.imgHandle img{
+  height: 100%;
+  width: 100%;
+}
+.handle{
+  padding: 3px 4px;
+  display: table;
+  position: absolute;
+  left: 50%;
+  /* right: 50%; */
+  bottom: -35px;
+  background-color: #ff1661;
+  border-radius: 10rem;
+  line-height: 1;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  cursor: move;
 }
 
 #image {
