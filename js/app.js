@@ -210,16 +210,24 @@ interact('.draggable').draggable({
                   transform: `translate(${x}px, ${y}px)`
 
               })
-              console.log(event.edges);
+            //   console.log(event.edges);
               Object.assign(event.target.dataset, {x, y})
           }
       }
   })
 
-
+  interact(".draggable").on("doubletap",function(event){
+      console.log(event.type, event.target);
+      let removedItem = event.target;
+      removedItem.remove();
+  })
+// $(".draggable").on("doubletap",function(event){
+//     console.log(this);
+// })
 
 function removeSticker(){
     //TODO button under img container to remove a selected sticker
+    
 }
 function applyFilter(event) {
   event.stopPropagation();
