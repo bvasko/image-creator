@@ -1,171 +1,170 @@
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
-<head>
-  <meta charset="utf-8" />
-  <title>Social Media Image Creator</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="utf-8" />
+    <title>Social Media Image Creator</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta property="og:title" content="" />
-  <meta property="og:type" content="" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
 
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pushster&family=Roboto:wght@100&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/materialize.min.css" />
-  <link rel="stylesheet" href="css/main.css" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pushster&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
 
-<body>
-  <header>
-    <h1>Social Media Image Creator</h1>
-  </header>
-  <!-- Add your site or application content here -->
-  <div class="container">
-    <div class="row">
-      <div class="col s6">
-        <!-- The image customization controls will go on this side -->
+  <body>
+    <header>
+      <h1>Social Media Image Creator</h1>
+    </header>
+    <!-- Add your site or application content here -->
+    <div class="container">
+      <div class="row">
+        <div class="col s6">
+          <!-- The image customization controls will go on this side -->
 
-        <ul id="image-search" class="sidenav">
-          <li>
-            <div class="user-view">
-              <div class="title">
-                <i class="material-icons sidenav-close">arrow_back</i>
-                Photo Search
+          <ul id="image-search" class="sidenav">
+            <li>
+              <div class="user-view">
+                <div class="title">
+                  <i class="material-icons sidenav-close">arrow_back</i>
+                  Photo Search
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="search">
-
-            <form class="input-field col s12" id="imgForm">
-              <input id="img-search" type="text">
-              <label for="img-search">Image Search</label>
-              <!--img-search-btn-->
-              <button class="btn waves-effect waves-light red" type="submit">Search
-                <i class="material-icons right"></i>
-              </button>
-            </form>
-          </li>
-          <li class="search">
-            <!--search results-->
-            <div class="imgSearchResultsContainer">
-              <h5>Search Results: <span id=""></span></h5>
-              <div class="row">
-                <section class="scrollMenu" id="image"></section>
+            </li>
+            <li class="search">
+              <form class="input-field col s12 imgForm">
+                <input id="imgInput" type="text" placeholder="Background Image">
+                <label for="imgInput">Image Search</label>
+                <!--img-search-btn-->
+                <button class="btn waves-effect waves-light red" type="submit">Search
+                  <i class="material-icons right"></i>
+                </button>
+              </form>
+            </li>
+            <li class="search">
+              <!--search results-->
+              <div class="imgResultsContainer">
+                <h5>Search Results for: <span id="imgSearch"></span></h5>
+                <div class="row">
+                  <section class="imgResults scrollMenu"></section>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-        <ul id="sticker-search" class="sidenav">
-          <li>
-            <div class="user-view">
-              <div class="title">
-                <i class="material-icons sidenav-close">arrow_back</i>
-                Sticker Search
+            </li>
+          </ul>
+          <ul id="sticker-search" class="sidenav">
+            <li>
+              <div class="user-view">
+                <div class="title">
+                  <i class="material-icons sidenav-close">arrow_back</i>
+                  Sticker Search
+                </div>
+            </li>
+            <li class="search">
+              <form class="giphyForm">
+                <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
+                <button type="submit" class="btn waves-effect waves-light">
+                  Search
+                </button>
+              </form>
+              <div class="giphyResultsContainer">
+                <h5>Search Results for: <span id="giphySearch"></span></h5>
+                <section class="giphyResults scrollMenu">
+                </section>
               </div>
-          </li>
-          <li class="search">
-            <form class="giphyForm">
-              <input id="giphyInput" type="text" placeholder="Stickers" autofocus="true" name="giphy" />
-              <button type="submit" class="btn waves-effect waves-light">
-                Search
-              </button>
-            </form>
-            <div class="giphyResultsContainer">
-              <h5>Search Results for: <span id="giphySearch"></span></h5>
-              <section class="giphyResults scrollMenu">
-              </section>
-            </div>
-          </li>
-        </ul>
-        <ul id="filter-menu" class="sidenav">
-          <li>
-            <div class="user-view">
-              <div class="title">
-                <i class="material-icons sidenav-close">arrow_back</i>
-                Image Filters
-              </div>
-          </li>
-          <li class="search">
-            <div class="filterIcons">
-              <ul id="FilterIcons"></ul>
-            </div> <!-- close row -->
-          </li>
-          <li>
-            <form action="#">
-              <div class="flex-container">
-                <!-- <select id="filterNameSelect" class="browser-default"></select> -->
-                <div id="displayIntensity"></div>
-              </div>
-            </form>
-          </li>
-        </ul>
-        <ul id="text-menu" class="sidenav">
-          <li>
-            <div class="user-view">
-              <div class="title">
-                <i class="material-icons sidenav-close">arrow_back</i>
-                Add Text
-              </div>
-          </li>
-        </ul>
-        <ul class="main-nav">
-          <li>
-            <a href="#" data-target="image-search" class="sidenav-trigger">
-              <i class="material-icons">image</i>Main Image</a>
-          </li>
-          <li>
-            <a href="#" data-target="filter-menu" class="sidenav-trigger">
-              <i class="material-icons">filter_vintage</i>Filters</a>
-          </li>
-          <li>
-            <a href="#" data-target="sticker-search" class="sidenav-trigger">
-              <i class="material-icons">insert_emoticon</i>Stickers</a>
-          </li>
-          <li>
-            <a href="#" data-target="text-menu" class="sidenav-trigger">
-              <i class="material-icons">text_fields</i>Text</a>
-          </li>
-        </ul>
+            </li>
+          </ul>
+          <ul id="filter-menu" class="sidenav">
+            <li>
+              <div class="user-view">
+                <div class="title">
+                  <i class="material-icons sidenav-close">arrow_back</i>
+                  Image Filters
+                </div>
+            </li>
+            <li class="search">
+              <div class="filterIcons">
+                <ul id="FilterIcons"></ul>
+              </div> <!-- close row -->
+            </li>
+            <li>
+              <form action="#">
+                <div class="flex-container">
+                  <!-- <select id="filterNameSelect" class="browser-default"></select> -->
+                  <div id="displayIntensity"></div>
+                </div>
+              </form>
+            </li>
+          </ul>
+          <ul id="text-menu" class="sidenav">
+            <li>
+              <div class="user-view">
+                <div class="title">
+                  <i class="material-icons sidenav-close">arrow_back</i>
+                  Add Text
+                </div>
+            </li>
+          </ul>
+          <ul class="main-nav">
+            <li>
+              <a href="#" data-target="image-search" class="sidenav-trigger">
+                <i class="material-icons">image</i>Main Image</a>
+            </li>
+            <li>
+              <a href="#" data-target="filter-menu" class="sidenav-trigger">
+                <i class="material-icons">filter_vintage</i>Filters</a>
+            </li>
+            <li>
+              <a href="#" data-target="sticker-search" class="sidenav-trigger">
+                <i class="material-icons">insert_emoticon</i>Stickers</a>
+            </li>
+            <li>
+              <a href="#" data-target="text-menu" class="sidenav-trigger">
+                <i class="material-icons">text_fields</i>Text</a>
+            </li>
+          </ul>
 
 
-      </div>
-      <div class="col s6">
-        <!-- The main image container goes over here -->
-        <div id="image-container">
-          <div class="module-inside"></div>
-          <!-- image filter section -->
+        </div>
+        <div class="col s6">
+          <!-- The main image container goes over here -->
+          <div id="image-container">
+            <div class="module-inside"></div>
+            <!-- image filter section -->
+          </div>
+
         </div>
 
       </div>
-
     </div>
-  </div>
 
-  <div id="imgSearch-modal" class="modal">
-    <div class="modal-content">
-      <h4 class="center-align">Please enter a search term!</h4>
+    <div id="imgSearch-modal" class="modal">
+      <div class="modal-content">
+        <h4 class="center-align">Please enter a search term!</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
-  </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="js/materialize.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/filters.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>
 
-</body>
+  </body>
 
 </html>
