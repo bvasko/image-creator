@@ -109,13 +109,6 @@ let ImageFilters = {
     display.style.setProperty(`--filter-type`, updated);
     // update filter var with new value
     // display.style.setProperty(`--filter-type`, _newFilter);
-  },
-  saveFilter: function() {
-    const savedFilters = JSON.parse(localStorage.getItem('myFilters')) || {};
-    const name = $('#filter_name_input').val();
-    const f = {[name]: ImageFilters.filterSettings};
-    const newLS = {...savedFilters, ...f};
-    localStorage.setItem('myFilters', JSON.stringify(newLS));
   }
 };
 
@@ -128,12 +121,11 @@ let FilterCards = {
       const filterData = ImageFilters.filterOptions[keyName];
       const filterStr = `${keyName}`;
       const rangeId = `${keyName}`;
-      const step = (keyName === 'brightness' || 'blur') ? .1 : 1;
       $(`#${this.containerId}`).append(
         `<li class="filter-setting">
             <span class="card-title">${keyName}</span>
             <p class="range-field">
-            <input data-filter="${filterStr}" step="${step}" class="filterInput" type="range" id="${rangeId}" min="${filterData.min}" max="${filterData.max}" />
+            <input data-filter="${filterStr}" class="filterInput" type="range" id="${rangeId}" min="${filterData.min}" max="${filterData.max}" />
             </p>
         </li>`
       );
@@ -151,6 +143,14 @@ FilterCards.generateFilterCard();
    ImageFilters.applyFilter(event);
 });
 $("#saveFilterForm").on('click', function(e) {
-  ImageFilters.saveFilter();
+  const savedFilters = JSON.parse(localStorage.getProperty('myFilters')) || [];
+  const filterSettings = ImageFilters.filterSettings;
+  const name = $('#filter_name_input').val;
+  const f = JSON.stringify({
+    name,
+    filterSettings
+  });
+  savedFilters.push(f);
+  localStorage.setProperty('myFilters')
 });
 $("#saveFilterModal").modal({});
