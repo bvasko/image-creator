@@ -6,12 +6,10 @@
   <title>Social Media Image Creator</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <meta property="og:title" content="" />
   <meta property="og:type" content="" />
   <meta property="og:url" content="" />
   <meta property="og:image" content="" />
-
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="icon.png" />
@@ -89,9 +87,20 @@
         <ul id="filter-menu" class="sidenav">
           <li>
             <div class="user-view">
-              <div class="title">
+              <div class="title ">
                 <i class="material-icons sidenav-close">arrow_back</i>
                 Image Filters
+              </div>
+              <div class="save-btn">
+                 <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn modal-trigger" href="#saveFilterModal">
+                  <i class="material-icons">save</i>
+                  Save Filter
+                </a>
+                <a class="waves-effect waves-light btn modal-trigger"  href='#' data-target='filter-dropdown'>
+                  <i class="material-icons">favorites</i>
+                  My Filters
+                </a>
               </div>
           </li>
           <li class="search">
@@ -170,7 +179,23 @@
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
     </div>
   </div>
-
+  <div id="saveFilterModal" class="modal">
+    <div class="modal-content">
+      <h4>Enter Filter Name</h4>
+      <div class="container">
+        <div class="row">
+          <div class="input-field col s6">
+            <input value="Alvin" id="filter_name_input" type="text" class="validate">
+            <label class="active" for="filter_name_input">Filter Name</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="saveFilterForm" class="modal-close waves-effect waves-green btn-flat">Save</a>
+    </div>
+  </div>
+           
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="js/materialize.min.js"></script>
