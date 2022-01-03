@@ -1,4 +1,4 @@
-
+$('.dropdown-trigger').dropdown();
 let ImageFilters = {
   imageContainer: '#image-container',
   filterOptions: {
@@ -67,6 +67,7 @@ let ImageFilters = {
     },
   },
   filterSettings: {},
+  lsFilters: {},
   removeFilter: function removeFilter(event) {
     const display = document.querySelector(this.imageContainer);
     const filterType = event.currentTarget.dataset.filter;
@@ -116,6 +117,17 @@ let ImageFilters = {
     const f = {[name]: ImageFilters.filterSettings};
     const newLS = {...savedFilters, ...f};
     localStorage.setItem('myFilters', JSON.stringify(newLS));
+  },
+  showFilter: function() {
+    const myFilters = JSON.parse(localStorage.getItem("myFilters"));
+    console.log(myFilters);
+    const names = Object.keys(myFilters);
+    this.lsFilters = myFilters;
+    let filterOpts = '';
+    names.forEach(name => {
+      filterOpts += `<li>${name}</li>`
+    });
+    $("#filter-menu .save-btn").append(`<div class='savedFilters'><ul id='myFilter'>${filterOpts}</ul></div>`);
   }
 };
 
@@ -150,7 +162,18 @@ FilterCards.generateFilterCard();
  $(document).on('input', '.filterInput', function(event) {
    ImageFilters.applyFilter(event);
 });
+$(document).on('click', '#myFilter', function(e){
+  const f = ImageFilters.lsFilters[e.target.innerText];
+  console.log(f)
+  ImageFilters.filterSettings = f;
+  ImageFilters.applyFilter();
+
+})
 $("#saveFilterForm").on('click', function(e) {
   ImageFilters.saveFilter();
 });
 $("#saveFilterModal").modal({});
+
+$("#showSavedFilters").on("click", function() {
+  ImageFilters.showFilter();
+});

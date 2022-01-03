@@ -233,6 +233,28 @@ h5 {
     margin: 0px 4px 0px;
     display: block;
     float: left;
+    position: relative;
+  }
+
+  #filter-menu .savedFilters {
+    width: 100px;
+    border: 2px solid rgb(146, 146, 146);
+    border-radius: 3px;
+    background-color: #FFF;
+    z-index: 99;
+    position: absolute;
+    right: 33px;
+    width: 200px;
+     
+  }
+
+  #filter-menu .savedFilters li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px; 
+  }
+  #filter-menu .savedFilters li:hover {
+    cursor: pointer;
+    color: rgb(22, 101, 204);
   }
 
   #saveFilterModal .container {
