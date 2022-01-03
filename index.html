@@ -6,12 +6,10 @@
     <title>Social Media Image Creator</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <meta property="og:title" content="" />
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon.png" />
@@ -137,16 +135,13 @@
 
 
         </div>
-        <div class="col s6">
-          <!-- The main image container goes over here -->
-          <div id="image-container">
-            <div class="module-inside"></div>
-            <!-- image filter section -->
-          </div>
-
+        <div id="trash">
+          <!-- <h4>Trash</h4> -->
         </div>
 
       </div>
+
+    </div>
     </div>
 
     <div id="imgSearch-modal" class="modal">
@@ -155,6 +150,23 @@
       </div>
       <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+    </div>
+    <div id="saveFilterModal" class="modal">
+      <div class="modal-content">
+        <h4>Enter Filter Name</h4>
+        <div class="container">
+          <div class="row">
+            <div class="input-field col s6">
+              <input value="Alvin" id="filter_name_input" type="text" class="validate">
+              <label class="active" for="filter_name_input">Filter Name</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" id="saveFilterForm" class="modal-close waves-effect waves-green btn-flat">Save</a>
       </div>
     </div>
 

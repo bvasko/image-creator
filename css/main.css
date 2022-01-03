@@ -36,7 +36,10 @@ h1 {
 .container {
   width: 90%;
 }
-
+#trash{
+  height:100vmax;
+  margin-top: 0px;
+}
 #image-container {
   aspect-ratio: 1 / 1;
   width: 100%;
@@ -45,9 +48,39 @@ h1 {
 }
 .draggable img{
   cursor: move;
+  overflow: hidden;
+  /* position: relative; */
+
+}
+.imgHandle{
+  /* max-height: 100px;
+  max-width: 100px; */
+}
+.imgHandle img{
+  height: 100%;
+  width: 100%;
+}
+.handle{
+  padding: 3px 4px;
+  display: table;
+  position: absolute;
+  left: 50%;
+  /* right: 50%; */
+  bottom: -35px;
+  background-color: #ff1661;
+  border-radius: 10rem;
+  line-height: 1;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  cursor: move;
 }
 
 #image {
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 12px; */
   overflow-y: hidden;
 }
   
@@ -176,3 +209,35 @@ h5 {
 .input-field > label {
   top: -1rem;
 }
+
+#filter-menu .user-view {
+  display: flex;
+  justify-content: space-between;
+}
+
+#filter-menu .title {
+  width: 47%;
+  display: inline-block;
+}
+
+#filter-menu .save-btn {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+  #filter-menu .save-btn i {
+    margin: 0px 4px 0px;
+    display: block;
+    float: left;
+  }
+
+  #saveFilterModal .container {
+    padding-top: 32px;
+    margin-top: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
