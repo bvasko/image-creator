@@ -23,8 +23,8 @@
 </head>
 
 <body>
-  <header>
-    <h1>Social Media Image Creator</h1>
+  <header class = "row">
+    <h1 class="col s12">Social Media Image Creator</h1>
   </header>
   <!-- Add your site or application content here -->
   <div class="container">
@@ -78,7 +78,7 @@
               </button>
             </form>
             <div class="giphyResultsContainer">
-              <h5>Search Results for: <span id="giphySearch"></span></h5>
+              <h5>Search Results: <span id="giphySearch"></span></h5>
               <section class="giphyResults scrollMenu">
               </section>
             </div>
@@ -125,7 +125,16 @@
                 Add Text
               </div>
           </li>
+          <li class="textBox">
+            <form class="textForm">
+              <input id="textInput" type="text" placeholder="Add Text Here" autofocus="true" name="text" />
+              <button type="submit" class="btn waves-effect waves-light">
+                Submit
+              </button>
+            </form>
+            </li>
         </ul>
+        
         <ul class="main-nav">
           <li>
             <a href="#" data-target="image-search" class="sidenav-trigger">
