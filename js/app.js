@@ -7,73 +7,70 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function(){
   $('.sidenav').sidenav();
 });
+var imgSearchEl = document.querySelector("#imgForm");
+var imgSearchInputEl = document.querySelector("#img-search");
 
-let imgSearchEl = $(".imgForm");
-let imgSearchInputEl = $("#imgInput");
-let imgResultsContainer = $(".imgResultsContainer");
-let imgSearchResultsEl = $(".imgResults");
-let imgSearchTermEl = $("#imgSearch");
+var imgSearchResultsContainer = document.querySelector(
+  ".imgSearchResultsContainer"
+);
+var imgSearchResultsEl = document.querySelector("#image");
 
-function handleImageSearch(event) {
+var formSubmitHandler = function (event) {
   event.preventDefault();
-  let newImageSearch = imgSearchInputEl.val().trim();
-  let backgroundImageSearch = newImageSearch.replace(/\s/g, "+");
-  if (!backgroundImageSearch) {
+
+  var imgSearchVal = imgSearchInputEl.value.trim();
+  console.log(imgSearchVal);
+  if (imgSearchVal) {
+    getApi(imgSearchVal);
+    imgSearchInputEl.value = "";
+  } else {
     $("#imgSearch-modal").modal({});
     $("#imgSearch-modal").modal("open");
   }
-  imgSearchResultsEl.empty();
-  imgSearchTermEl.text("");
-  imgSearchInputEl.val("");
-  unsplashImageSearch(backgroundImageSearch);
-}
+};
 
-function unsplashImageSearch(search) {
-  console.log(search);
-  let imgSearchVal = search.replace(/\+/g, " ");
-  console.log(imgSearchVal);
-  imgSearchTermEl.text(imgSearchVal);
-  let accessKey = "EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI";
-  let unsplashAPIUrl =
+function getApi(imgSearchVal) {
+  var accessKey = "EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI";
+  var requestUrl =
     "https://api.unsplash.com/search/photos?query=" +
     imgSearchVal +
     "&orientation=squarish&content_filter=high&client_id=" +
     accessKey +
     "&fm=jpg";
 
-  fetch(unsplashAPIUrl)
+  fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-      if (data.results == 0) {
-        imgSearchTermEl.text("Sorry, no results found for: " + imgSearchVal);
-      } else
-        for (let i = 0; i < 9; i++) {
-          const img = document.createElement("img");
-          img.src = data.results[i].urls.thumb;
 
-          img.addEventListener("click", function (event) {
-            console.log("clicked");
-            console.log(event.target.src);
-            let selectedImg = event.target.src;
-            console.log(selectedImg);
-            let image = new Image();
-            console.log(image);
-            image.src = selectedImg;
-            imgDisplay = document.querySelector("#image-container").style;
-            imgDisplay.setProperty(
-              "--background-image-url",
-              "url('" + selectedImg + "')"
-            );
-            console.log(imgDisplay);
-          });
-          imgSearchResultsEl.append(img);
-        }
+      for (let i = 0; i < 9; i++) {
+        const img = document.createElement("img");
+        img.src = data.results[i].urls.thumb;
+
+        img.addEventListener("click", function (event) {
+          console.log("clicked");
+          console.log(event.target.src);
+          let selectedImg = event.target.src;
+          console.log(selectedImg);
+          let image = new Image();
+          console.log(image);
+          image.src = selectedImg;
+          // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
+          imgDisplay = document.querySelector("#image-container").style;
+          imgDisplay.setProperty(
+            "--background-image-url",
+            "url('" + selectedImg + "')"
+          );
+          console.log(imgDisplay);
+        });
+        imgSearchResultsEl.append(img);
+      }
     });
 }
-imgSearchEl.on("submit", handleImageSearch);
+imgSearchEl.addEventListener("submit", formSubmitHandler);
+
 //////////////////////////////////////////////////////////////////////////////
 
 let giphyKey = "bAqrGC0EFBsitN09IxRQsJdQPme35o1E";
@@ -105,7 +102,7 @@ function giphyStickerSearch(search) {
   giphySearchTermEl.text(searchVal);
 
     let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search
-    +"&limit=5&offset=0&rating=g&lang=en&bundle=fixed_width_small";
+    +"&limit=15&offset=0&rating=g&lang=en&bundle=fixed_width_small";
 
   fetch(giphyAPIUrl)
     .then(function (response) {
@@ -163,8 +160,6 @@ function pasteSticker(event){
 let restrictParent = interact.modifiers.restrictRect({
         restriction: "#image-container",
         elementRect: { left: 0, right: 1, top: 0, bottom: 0 },
-        // preserveAspectRatio: true,
-        // endOnly: true
 });
 let coord = {l: 0, t: 0, r: 0, b: 0};
 interact('.imgHandle').draggable({
@@ -189,6 +184,8 @@ interact('.imgHandle').draggable({
 
         },
       end (event){
+        event.preventDefault();
+
         console.log(coord);
         console.log(event.type);
         return coord;
@@ -199,34 +196,24 @@ interact('.imgHandle').draggable({
 
 
   interact(".imgHandle").resizable({
-      edges: {top: true, left: true, bottom: true, right: true},
-    //   modifiers: [interact.modifiers.aspectRatio({
-    //       equalDelta: true,
-      
+      edges: {top: false, left: false, bottom: true, right: true},        
           modifiers: [restrictParent],
-    //   })
-    // ],
+  
       listeners: {
           move (event){
               let {x, y,angle} = event.target.dataset;
-            //   if(x<100 && y<100){
-              x = (parseFloat(x) || 0) + event.deltaRect.left;
-              y = (parseFloat(y) || 0) + event.deltaRect.top;
-              c = x + event.rect.width;
-              d = y + event.rect.height;
+              x = (parseFloat(x) || 0);
+              y = (parseFloat(y) || 0);
+              x+=event.deltaRect.left;
+              y+=event.deltaRect.top;
               angle =parseFloat(angle || 0);
-            //   console.log(x,y,c,d);
+              Object.assign(event.target.dataset, {x, y, angle})
               Object.assign(event.target.style, {
                   width: `${event.rect.width}px`,
                   height: `${event.rect.height}px`,
-                  webkitTransform : `translate(${x}px, ${y}px rotate(${angle}rad))`,
-                  transform: `translate(${x}px, ${y}px rotate(${angle}rad))`
+                  transform: `translate(${x}px, ${y}px rotate(${angle}rad)`
                   
-              })
-            // }else{
-              Object.assign(event.target.dataset, {x, y, angle})
-            // }
-          
+              })          
         }
       }
   })
@@ -234,30 +221,26 @@ interact('.imgHandle').draggable({
   interact("#trash").dropzone({
       accept: ".imgHandle",
       ondrop: function(event){
+          event.preventDefault();
           console.log(event.relatedTarget);
           event.relatedTarget.remove();
       }
   })
-//   interact(".draggable").on("doubletap",function(event){
-//       console.log(event.type, event.target);
-//       let removedItem = event.target;
-//       removedItem.remove();
-//   })
     interact(".handle").draggable({
         modifiers: [restrictParent],
         onstart: function(event) {
-            var box = event.target.parentElement;
-            var rect = box.getBoundingClientRect();
-      
-            // store the center as the element has css `transform-origin: center center`
+            event.preventDefault();
+            let box = event.target.parentElement;
+            let rect = box.getBoundingClientRect();
             box.setAttribute('data-center-x', rect.left + rect.width / 2);
             box.setAttribute('data-center-y', rect.top + rect.height / 2);
             // get the angle of the element when the drag starts
             box.setAttribute('data-angle', getDragAngle(event));
           },
           onmove: function(event) {
+            event.preventDefault();
+            // gets x and y location
             var box = event.target.parentElement;
-      
             var pos = {
               x: parseFloat(box.getAttribute('data-x')) || 0,
               y: parseFloat(box.getAttribute('data-y')) || 0
@@ -271,9 +254,10 @@ interact('.imgHandle').draggable({
           },
           
           onend: function(event) {
+            event.preventDefault();
             var box = event.target.parentElement;
       
-            // save the angle on dragend
+            // save the angle when onend is triggered
             box.setAttribute('data-angle', getDragAngle(event));
           },
         })
@@ -281,22 +265,21 @@ interact('.imgHandle').draggable({
 
 
 function getDragAngle(event) {
-    var box = event.target.parentElement;
+    event.preventDefault();
+    let box = event.target.parentElement;
     console.log(box);
-    var startAngle = parseFloat(box.getAttribute('data-angle')) || 0;
-    var center = {
+    let startAngle = parseFloat(box.getAttribute('data-angle')) || 0;
+    let center = {
       x: parseFloat(box.getAttribute('data-center-x')) || 0,
       y: parseFloat(box.getAttribute('data-center-y')) || 0
     };
-    var angle = Math.atan2(center.y - event.clientY,
+    // calculates angle on the drag event then returns
+    let angle = Math.atan2(center.y - event.clientY,
       center.x - event.clientX);
   
     return angle - startAngle;
   }
-// function removeSticker(){
-//     //TODO button under img container to remove a selected sticker
-    
-// }
+
 function applyFilter(event) {
   event.stopPropagation();
   event.stopImmediatePropagation();
@@ -306,3 +289,22 @@ function applyFilter(event) {
 }
 
 giphySearchEl.on("submit", handleGiphySearch);
+let textFormEl = $(".textForm");
+let textInputEl = $("#textInput");
+
+function textInput(event) {
+    event.preventDefault();
+    let newText = textInputEl.val().trim();
+    if (!newText) {
+      console.error("Need text input");
+    }
+    textInputEl.val("");
+    textBox(newText);
+  }
+function textBox(txt){
+    let texta=$("<textarea>");
+    texta.val(txt);
+
+
+}
+  textFormEl.on("submit", textInput);
