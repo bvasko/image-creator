@@ -173,6 +173,7 @@ interact('.imgHandle').draggable({
       }
     ,
       move (event) {
+        // event.preventDefault();
         let {x,y,angle} = event.target.dataset;
               x= (parseFloat(x) || 0) + event.dx;
               y = (parseFloat(y) || 0) + event.dy;
@@ -186,6 +187,8 @@ interact('.imgHandle').draggable({
 
         },
       end (event){
+        event.preventDefault();
+
         console.log(coord);
         console.log(event.type);
         return coord;
@@ -196,33 +199,34 @@ interact('.imgHandle').draggable({
 
 
   interact(".imgHandle").resizable({
-      edges: {top: true, left: true, bottom: true, right: true},
+      edges: {top: false, left: false, bottom: true, right: true},
     //   modifiers: [interact.modifiers.aspectRatio({
     //       equalDelta: true,
-      
+          
           modifiers: [restrictParent],
     //   })
     // ],
       listeners: {
           move (event){
+            // event.preventDefault();
               let {x, y,angle} = event.target.dataset;
-            //   if(x<100 && y<100){
-              x = (parseFloat(x) || 0) + event.deltaRect.left;
-              y = (parseFloat(y) || 0) + event.deltaRect.top;
+              x = (parseFloat(x) || 0);
+              y = (parseFloat(y) || 0);
+              x+=event.deltaRect.left;
+              y+=event.deltaRect.top;
               c = x + event.rect.width;
               d = y + event.rect.height;
               angle =parseFloat(angle || 0);
-            //   console.log(x,y,c,d);
+              console.log(x,y);
+              Object.assign(event.target.dataset, {x, y, angle})
               Object.assign(event.target.style, {
                   width: `${event.rect.width}px`,
                   height: `${event.rect.height}px`,
-                  webkitTransform : `translate(${x}px, ${y}px rotate(${angle}rad))`,
-                  transform: `translate(${x}px, ${y}px rotate(${angle}rad))`
+                //   webkitTransform : `translate(${x}px, ${y}px rotate(${angle}rad))`,
+                  transform: `translate(${x}px, ${y}px rotate(${angle}rad)`
                   
               })
-            // }else{
-              Object.assign(event.target.dataset, {x, y, angle})
-            // }
+            //   Object.assign(event.target.dataset, {x, y, angle})
           
         }
       }
@@ -231,18 +235,21 @@ interact('.imgHandle').draggable({
   interact("#trash").dropzone({
       accept: ".imgHandle",
       ondrop: function(event){
+          event.preventDefault();
           console.log(event.relatedTarget);
           event.relatedTarget.remove();
       }
   })
-//   interact(".draggable").on("doubletap",function(event){
-//       console.log(event.type, event.target);
-//       let removedItem = event.target;
-//       removedItem.remove();
-//   })
+  interact(".imgHandle").on("doubletap",function(event){
+    //   let removedItem = event.target.children(0);
+    //   if(removedItem.("hide"))
+    //   removedItem.addClass("hide")
+    // console.log(removedItem);
+  })
     interact(".handle").draggable({
         modifiers: [restrictParent],
         onstart: function(event) {
+            event.preventDefault();
             var box = event.target.parentElement;
             var rect = box.getBoundingClientRect();
       
@@ -253,8 +260,8 @@ interact('.imgHandle').draggable({
             box.setAttribute('data-angle', getDragAngle(event));
           },
           onmove: function(event) {
+            event.preventDefault();
             var box = event.target.parentElement;
-      
             var pos = {
               x: parseFloat(box.getAttribute('data-x')) || 0,
               y: parseFloat(box.getAttribute('data-y')) || 0
@@ -268,6 +275,7 @@ interact('.imgHandle').draggable({
           },
           
           onend: function(event) {
+            event.preventDefault();
             var box = event.target.parentElement;
       
             // save the angle on dragend
@@ -278,6 +286,7 @@ interact('.imgHandle').draggable({
 
 
 function getDragAngle(event) {
+    event.preventDefault();
     var box = event.target.parentElement;
     console.log(box);
     var startAngle = parseFloat(box.getAttribute('data-angle')) || 0;
@@ -303,3 +312,22 @@ function applyFilter(event) {
 }
 
 giphySearchEl.on("submit", handleGiphySearch);
+let textFormEl = $(".textForm");
+let textInputEl = $("#textInput");
+
+function textInput(event) {
+    event.preventDefault();
+    let newText = textInputEl.val().trim();
+    if (!newText) {
+      console.error("Need text input");
+    }
+    textInputEl.val("");
+    textBox(newText);
+  }
+function textBox(txt){
+    let texta=$("<textarea>");
+    texta.val(txt);
+    
+
+}
+  textFormEl.on("submit", textInput);
