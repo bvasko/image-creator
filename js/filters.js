@@ -1,4 +1,3 @@
-$('.dropdown-trigger').dropdown();
 let ImageFilters = {
   imageContainer: '#image-container',
   filterOptions: {
@@ -120,14 +119,13 @@ let ImageFilters = {
   },
   showFilter: function() {
     const myFilters = JSON.parse(localStorage.getItem("myFilters"));
-    console.log(myFilters);
     const names = Object.keys(myFilters);
     this.lsFilters = myFilters;
     let filterOpts = '';
     names.forEach(name => {
       filterOpts += `<li>${name}</li>`
     });
-    $("#filter-menu .save-btn").append(`<div class='savedFilters'><ul id='myFilter'>${filterOpts}</ul></div>`);
+    $("#filter-menu .save-btn").append(`<div id='savedFilterMenu' class='savedFilters'><ul id='myFilter'>${filterOpts}</ul></div>`);
   }
 };
 
@@ -153,6 +151,8 @@ let FilterCards = {
   }
 };
 
+
+$('.dropdown-trigger').dropdown();
 /** Generate filter icons */
 FilterCards.generateFilterCard();
 /**
@@ -164,16 +164,29 @@ FilterCards.generateFilterCard();
 });
 $(document).on('click', '#myFilter', function(e){
   const f = ImageFilters.lsFilters[e.target.innerText];
-  console.log(f)
   ImageFilters.filterSettings = f;
-  ImageFilters.applyFilter();
+  // ImageFilters.applyFilter();
 
 })
 $("#saveFilterForm").on('click', function(e) {
   ImageFilters.saveFilter();
 });
 $("#saveFilterModal").modal({});
+$("#noFiltersMsg").modal({});
 
-$("#showSavedFilters").on("click", function() {
-  ImageFilters.showFilter();
+$("#showSavedFilters").on("click", function(e) {
+  if ($("#savedFilterMenu").css("display") === "block") {
+    $("#savedFilterMenu").remove();
+  } else {
+    const filters = JSON.parse(localStorage.getItem("myFilters"));
+    if (!filters) {
+      $('#noFiltersMsg').modal('open');
+      return;
+    } else {
+      
+      ImageFilters.showFilter();
+      $("#savedFilterMenu").css("display", "block");
+    }
+
+  }
 });

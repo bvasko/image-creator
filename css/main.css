@@ -250,7 +250,7 @@ h5 {
     position: absolute;
     right: 33px;
     width: 200px;
-     
+    display: block;
   }
 
   #filter-menu .savedFilters li {
