@@ -147,16 +147,24 @@ function pasteSticker(event){
     console.log($(this));
     let customizableSticker = $(this).clone();
     customizableSticker.addClass("draggable");
-    customizableSticker.appendTo(imgContainerEl);
+    let imgEl=$("<div>");
+    imgEl.addClass("imgHandle");
+    let rtHandle = $("<div>&circlearrowright;</div>");
+    rtHandle.addClass("handle");
+    rtHandle.appendTo(imgEl);
+    imgEl.append(customizableSticker);
+    imgEl.appendTo(imgContainerEl);
 }
 
 
-const restrictParent = interact.modifiers.restrictRect({
+let restrictParent = interact.modifiers.restrictRect({
         restriction: "#image-container",
+        elementRect: { left: 0, right: 1, top: 0, bottom: 0 },
+        // preserveAspectRatio: true,
         // endOnly: true
 });
-
-interact('.draggable').draggable({
+let coord = {l: 0, t: 0, r: 0, b: 0};
+interact('.imgHandle').draggable({
     maxPerElement: Infinity,
     modifiers: [restrictParent],
     listeners: {
@@ -165,42 +173,127 @@ interact('.draggable').draggable({
       }
     ,
       move (event) {
-        let {x,y} = event.target.dataset;
+        let {x,y,angle} = event.target.dataset;
               x= (parseFloat(x) || 0) + event.dx;
               y = (parseFloat(y) || 0) + event.dy;
-              Object.assign(event.target.style.transform =`translate(${x}px, ${y}px)`)
-              Object.assign(event.target.dataset, {x,y})
+              angle=(parseFloat(angle) || 0);
+              Object.assign(event.target.style.transform =`translate(${x}px, ${y}px) rotate(${angle}rad)`)
+              Object.assign(event.target.dataset, {x,y,angle})
+              coord.l =x;
+              coord.t =y;
+              coord.r= x+ event.target.width;
+              coord.b= y+ event.target.height;
+
         },
       end (event){
+        console.log(coord);
         console.log(event.type);
+        return coord;
       }
     }
 })
     
 
 
-  interact(".draggable").resizable({
+  interact(".imgHandle").resizable({
       edges: {top: true, left: true, bottom: true, right: true},
-      modifiers: [restrictParent],
+    //   modifiers: [interact.modifiers.aspectRatio({
+    //       equalDelta: true,
+      
+          modifiers: [restrictParent],
+    //   })
+    // ],
       listeners: {
           move (event){
-              let {a,b} = event.target.dataset;
-              a= (parseFloat(a) || 0) + event.deltaRect.right;
-              b = (parseFloat(b) || 0) + event.deltaRect.top;
+              let {x, y,angle} = event.target.dataset;
+            //   if(x<100 && y<100){
+              x = (parseFloat(x) || 0) + event.deltaRect.left;
+              y = (parseFloat(y) || 0) + event.deltaRect.top;
+              c = x + event.rect.width;
+              d = y + event.rect.height;
+              angle =parseFloat(angle || 0);
+            //   console.log(x,y,c,d);
               Object.assign(event.target.style, {
                   width: `${event.rect.width}px`,
                   height: `${event.rect.height}px`,
+                  webkitTransform : `translate(${x}px, ${y}px rotate(${angle}rad))`,
+                  transform: `translate(${x}px, ${y}px rotate(${angle}rad))`
+                  
               })
-              Object.assign(event.target.dataset, { a, b })
-          }
+            // }else{
+              Object.assign(event.target.dataset, {x, y, angle})
+            // }
+          
+        }
       }
   })
 
+  interact("#trash").dropzone({
+      accept: ".imgHandle",
+      ondrop: function(event){
+          console.log(event.relatedTarget);
+          event.relatedTarget.remove();
+      }
+  })
+//   interact(".draggable").on("doubletap",function(event){
+//       console.log(event.type, event.target);
+//       let removedItem = event.target;
+//       removedItem.remove();
+//   })
+    interact(".handle").draggable({
+        modifiers: [restrictParent],
+        onstart: function(event) {
+            var box = event.target.parentElement;
+            var rect = box.getBoundingClientRect();
+      
+            // store the center as the element has css `transform-origin: center center`
+            box.setAttribute('data-center-x', rect.left + rect.width / 2);
+            box.setAttribute('data-center-y', rect.top + rect.height / 2);
+            // get the angle of the element when the drag starts
+            box.setAttribute('data-angle', getDragAngle(event));
+          },
+          onmove: function(event) {
+            var box = event.target.parentElement;
+      
+            var pos = {
+              x: parseFloat(box.getAttribute('data-x')) || 0,
+              y: parseFloat(box.getAttribute('data-y')) || 0
+            };
+      
+            var angle = getDragAngle(event);
+            console.log(angle);
+      
+            // update transform style on dragmove
+            box.style.transform = 'translate(' + pos.x + 'px, ' + pos.y + 'px) rotate(' + angle + 'rad' + ')';
+          },
+          
+          onend: function(event) {
+            var box = event.target.parentElement;
+      
+            // save the angle on dragend
+            box.setAttribute('data-angle', getDragAngle(event));
+          },
+        })
+    
 
 
-function removeSticker(){
-    //TODO button under img container to remove a selected sticker
-}
+function getDragAngle(event) {
+    var box = event.target.parentElement;
+    console.log(box);
+    var startAngle = parseFloat(box.getAttribute('data-angle')) || 0;
+    var center = {
+      x: parseFloat(box.getAttribute('data-center-x')) || 0,
+      y: parseFloat(box.getAttribute('data-center-y')) || 0
+    };
+    var angle = Math.atan2(center.y - event.clientY,
+      center.x - event.clientX);
+  
+    return angle - startAngle;
+  }
+// function removeSticker(){
+//     //TODO button under img container to remove a selected sticker
+    
+// }
 function applyFilter(event) {
   event.stopPropagation();
   event.stopImmediatePropagation();
