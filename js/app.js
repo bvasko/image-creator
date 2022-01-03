@@ -7,73 +7,70 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function(){
   $('.sidenav').sidenav();
 });
+var imgSearchEl = document.querySelector("#imgForm");
+var imgSearchInputEl = document.querySelector("#img-search");
 
-let imgSearchEl = $(".imgForm");
-let imgSearchInputEl = $("#imgInput");
-let imgResultsContainer = $(".imgResultsContainer");
-let imgSearchResultsEl = $(".imgResults");
-let imgSearchTermEl = $("#imgSearch");
+var imgSearchResultsContainer = document.querySelector(
+  ".imgSearchResultsContainer"
+);
+var imgSearchResultsEl = document.querySelector("#image");
 
-function handleImageSearch(event) {
+var formSubmitHandler = function (event) {
   event.preventDefault();
-  let newImageSearch = imgSearchInputEl.val().trim();
-  let backgroundImageSearch = newImageSearch.replace(/\s/g, "+");
-  if (!backgroundImageSearch) {
+
+  var imgSearchVal = imgSearchInputEl.value.trim();
+  console.log(imgSearchVal);
+  if (imgSearchVal) {
+    getApi(imgSearchVal);
+    imgSearchInputEl.value = "";
+  } else {
     $("#imgSearch-modal").modal({});
     $("#imgSearch-modal").modal("open");
   }
-  imgSearchResultsEl.empty();
-  imgSearchTermEl.text("");
-  imgSearchInputEl.val("");
-  unsplashImageSearch(backgroundImageSearch);
-}
+};
 
-function unsplashImageSearch(search) {
-  console.log(search);
-  let imgSearchVal = search.replace(/\+/g, " ");
-  console.log(imgSearchVal);
-  imgSearchTermEl.text(imgSearchVal);
-  let accessKey = "EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI";
-  let unsplashAPIUrl =
+function getApi(imgSearchVal) {
+  var accessKey = "EHxuxyvymZS2_p4tpYQf51gNAOtih5AJF9xo-7UAmzI";
+  var requestUrl =
     "https://api.unsplash.com/search/photos?query=" +
     imgSearchVal +
     "&orientation=squarish&content_filter=high&client_id=" +
     accessKey +
     "&fm=jpg";
 
-  fetch(unsplashAPIUrl)
+  fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-      if (data.results == 0) {
-        imgSearchTermEl.text("Sorry, no results found for: " + imgSearchVal);
-      } else
-        for (let i = 0; i < 9; i++) {
-          const img = document.createElement("img");
-          img.src = data.results[i].urls.thumb;
 
-          img.addEventListener("click", function (event) {
-            console.log("clicked");
-            console.log(event.target.src);
-            let selectedImg = event.target.src;
-            console.log(selectedImg);
-            let image = new Image();
-            console.log(image);
-            image.src = selectedImg;
-            imgDisplay = document.querySelector("#image-container").style;
-            imgDisplay.setProperty(
-              "--background-image-url",
-              "url('" + selectedImg + "')"
-            );
-            console.log(imgDisplay);
-          });
-          imgSearchResultsEl.append(img);
-        }
+      for (let i = 0; i < 9; i++) {
+        const img = document.createElement("img");
+        img.src = data.results[i].urls.thumb;
+
+        img.addEventListener("click", function (event) {
+          console.log("clicked");
+          console.log(event.target.src);
+          let selectedImg = event.target.src;
+          console.log(selectedImg);
+          let image = new Image();
+          console.log(image);
+          image.src = selectedImg;
+          // document.querySelector(".module-inside").style. backgroundImage = "url('"+selectedImg+"')";
+          imgDisplay = document.querySelector("#image-container").style;
+          imgDisplay.setProperty(
+            "--background-image-url",
+            "url('" + selectedImg + "')"
+          );
+          console.log(imgDisplay);
+        });
+        imgSearchResultsEl.append(img);
+      }
     });
 }
-imgSearchEl.on("submit", handleImageSearch);
+imgSearchEl.addEventListener("submit", formSubmitHandler);
+
 //////////////////////////////////////////////////////////////////////////////
 
 let giphyKey = "bAqrGC0EFBsitN09IxRQsJdQPme35o1E";
