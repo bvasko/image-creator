@@ -209,3 +209,35 @@ h5 {
 .input-field > label {
   top: -1rem;
 }
+
+#filter-menu .user-view {
+  display: flex;
+  justify-content: space-between;
+}
+
+#filter-menu .title {
+  width: 47%;
+  display: inline-block;
+}
+
+#filter-menu .save-btn {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+  #filter-menu .save-btn i {
+    margin: 0px 4px 0px;
+    display: block;
+    float: left;
+  }
+
+  #saveFilterModal .container {
+    padding-top: 32px;
+    margin-top: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
