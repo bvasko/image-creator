@@ -108,4 +108,4 @@ SOFTWARE.
 5. Locally storing previous filters in filters sidenav
 
 ## How to Contribute
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+If there are any suggestions to improve this generator, this is my [GitHub profile](https://github.com/MaxStump13) account. The repo can be found at, [Github repo](https://github.com/MaxStump13/image-creator).
