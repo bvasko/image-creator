@@ -222,7 +222,9 @@ h5 {
   width: 47%;
   display: inline-block;
 }
-
+.textForm{
+  padding: 32px 32px 0px;
+}
 #filter-menu .save-btn {
   display: inline-block;
   font-family: 'Roboto', sans-serif;
@@ -243,4 +245,9 @@ h5 {
     margin-top: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+  @media(max-width: 550px){
+    header h1{
+      font-size: 24px;
+    }
   }

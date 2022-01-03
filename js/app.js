@@ -102,7 +102,7 @@ function giphyStickerSearch(search) {
   giphySearchTermEl.text(searchVal);
 
     let giphyAPIUrl = "https://api.giphy.com/v1/gifs/search?api_key=bAqrGC0EFBsitN09IxRQsJdQPme35o1E&q="+search
-    +"&limit=5&offset=0&rating=g&lang=en&bundle=fixed_width_small";
+    +"&limit=15&offset=0&rating=g&lang=en&bundle=fixed_width_small";
 
   fetch(giphyAPIUrl)
     .then(function (response) {
@@ -160,8 +160,6 @@ function pasteSticker(event){
 let restrictParent = interact.modifiers.restrictRect({
         restriction: "#image-container",
         elementRect: { left: 0, right: 1, top: 0, bottom: 0 },
-        // preserveAspectRatio: true,
-        // endOnly: true
 });
 let coord = {l: 0, t: 0, r: 0, b: 0};
 interact('.imgHandle').draggable({
@@ -173,7 +171,6 @@ interact('.imgHandle').draggable({
       }
     ,
       move (event) {
-        // event.preventDefault();
         let {x,y,angle} = event.target.dataset;
               x= (parseFloat(x) || 0) + event.dx;
               y = (parseFloat(y) || 0) + event.dy;
@@ -199,35 +196,24 @@ interact('.imgHandle').draggable({
 
 
   interact(".imgHandle").resizable({
-      edges: {top: false, left: false, bottom: true, right: true},
-    //   modifiers: [interact.modifiers.aspectRatio({
-    //       equalDelta: true,
-          
+      edges: {top: false, left: false, bottom: true, right: true},        
           modifiers: [restrictParent],
-    //   })
-    // ],
+  
       listeners: {
           move (event){
-            // event.preventDefault();
               let {x, y,angle} = event.target.dataset;
               x = (parseFloat(x) || 0);
               y = (parseFloat(y) || 0);
               x+=event.deltaRect.left;
               y+=event.deltaRect.top;
-              c = x + event.rect.width;
-              d = y + event.rect.height;
               angle =parseFloat(angle || 0);
-              console.log(x,y);
               Object.assign(event.target.dataset, {x, y, angle})
               Object.assign(event.target.style, {
                   width: `${event.rect.width}px`,
                   height: `${event.rect.height}px`,
-                //   webkitTransform : `translate(${x}px, ${y}px rotate(${angle}rad))`,
                   transform: `translate(${x}px, ${y}px rotate(${angle}rad)`
                   
-              })
-            //   Object.assign(event.target.dataset, {x, y, angle})
-          
+              })          
         }
       }
   })
@@ -240,20 +226,12 @@ interact('.imgHandle').draggable({
           event.relatedTarget.remove();
       }
   })
-  interact(".imgHandle").on("doubletap",function(event){
-    //   let removedItem = event.target.children(0);
-    //   if(removedItem.("hide"))
-    //   removedItem.addClass("hide")
-    // console.log(removedItem);
-  })
     interact(".handle").draggable({
         modifiers: [restrictParent],
         onstart: function(event) {
             event.preventDefault();
-            var box = event.target.parentElement;
-            var rect = box.getBoundingClientRect();
-      
-            // store the center as the element has css `transform-origin: center center`
+            let box = event.target.parentElement;
+            let rect = box.getBoundingClientRect();
             box.setAttribute('data-center-x', rect.left + rect.width / 2);
             box.setAttribute('data-center-y', rect.top + rect.height / 2);
             // get the angle of the element when the drag starts
@@ -261,6 +239,7 @@ interact('.imgHandle').draggable({
           },
           onmove: function(event) {
             event.preventDefault();
+            // gets x and y location
             var box = event.target.parentElement;
             var pos = {
               x: parseFloat(box.getAttribute('data-x')) || 0,
@@ -278,7 +257,7 @@ interact('.imgHandle').draggable({
             event.preventDefault();
             var box = event.target.parentElement;
       
-            // save the angle on dragend
+            // save the angle when onend is triggered
             box.setAttribute('data-angle', getDragAngle(event));
           },
         })
@@ -287,22 +266,20 @@ interact('.imgHandle').draggable({
 
 function getDragAngle(event) {
     event.preventDefault();
-    var box = event.target.parentElement;
+    let box = event.target.parentElement;
     console.log(box);
-    var startAngle = parseFloat(box.getAttribute('data-angle')) || 0;
-    var center = {
+    let startAngle = parseFloat(box.getAttribute('data-angle')) || 0;
+    let center = {
       x: parseFloat(box.getAttribute('data-center-x')) || 0,
       y: parseFloat(box.getAttribute('data-center-y')) || 0
     };
-    var angle = Math.atan2(center.y - event.clientY,
+    // calculates angle on the drag event then returns
+    let angle = Math.atan2(center.y - event.clientY,
       center.x - event.clientX);
   
     return angle - startAngle;
   }
-// function removeSticker(){
-//     //TODO button under img container to remove a selected sticker
-    
-// }
+
 function applyFilter(event) {
   event.stopPropagation();
   event.stopImmediatePropagation();
@@ -327,7 +304,7 @@ function textInput(event) {
 function textBox(txt){
     let texta=$("<textarea>");
     texta.val(txt);
-    
+
 
 }
   textFormEl.on("submit", textInput);
