@@ -17,12 +17,19 @@ The motivation behind developing this application was to create and image editor
 
 
 ## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-- [Features](#features)
-- [How to Contribute](#how-to-contribute)
+- [image-creator](#image-creator)
+  - [Libraries](#libraries)
+    - [Materialize](#materialize)
+    - [interact.js](#interactjs)
+    - [jQuery](#jquery)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Credits](#credits)
+  - [License](#license)
+  - [Features](#features)
+  - [How to Contribute](#how-to-contribute)
 
 ## Installation
 N/A
@@ -76,7 +83,7 @@ If you followed tutorials, include links to those here as well.
 12. [softauthor](https://softauthor.com/javascript-working-with-images/)
 13. [encodedna](https://www.encodedna.com/css-tutorials/add-text-to-image-and-save-the-image.htm)
 14. [imgix](https://docs.imgix.com/apis/rendering)
-
+15. [css-tricks](https://css-tricks.com/apply-a-filter-to-a-background-image/)
 ## License
 MIT License
 
