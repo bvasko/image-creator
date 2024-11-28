@@ -35,7 +35,7 @@ The motivation behind developing this application was to create and image editor
 N/A
 
 ## Usage
-The link to the deployed site is here. [image-creator](https://maxstump13.github.io/image-creator/)
+The link to the deployed site is here. [image-creator](https://bvasko.github.io/image-creator/)
 
 When the page is first loaded, this is the home screen.
  ![homepage](./images/homepage.png)
@@ -47,17 +47,13 @@ From here, the user can select a background image via a search bar to the unspla
 After an image is selected, the user can apply filters via the filter sidebar scrollers. The user then has the option to save the settings locally.
 
 ![filter menu before](./images/filterBefore.png)
-
 ![filter menu after applied](./images/filterAfter.png)
 
 Next the user has the option to add gifs via the sticker sidebar menu via a Giphy API call. The user can add them by just clicking. Once added, the user can also reposition, resize, and rotate the images. Drag and drop functions work when the gif is clicked and held in the middle of the gif. The resize feature works from the bottom and ride sides/edge of the gif. The rotation function is activated by clicking the red rotation arrow. These steps are displayed below in a series of images.
 
 ![gif after a search](./images/gifBefore.png)
-
 ![gif after a drag](./images/gifDrag.png)
-
 ![gif after a resize](./images/gifResize.png)
-
 ![gif after a rotation](./images/gifRotate.png)
 
 To remove an unwanted gif, simply drag the gif under the image container and it will be deleted.
@@ -87,7 +83,7 @@ If you followed tutorials, include links to those here as well.
 ## License
 MIT License
 
-Copyright (c) [2022] [Maximilian Stump]
+Copyright (c) [2022] [Bonnie Dipasquale]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -115,4 +111,4 @@ SOFTWARE.
 5. Locally storing previous filters in filters sidenav
 
 ## How to Contribute
-If there are any suggestions to improve this generator, this is my [GitHub profile](https://github.com/MaxStump13) account. The repo can be found at, [Github repo](https://github.com/MaxStump13/image-creator).
+If there are any suggestions to improve this generator, this is my [GitHub profile](https://github.com/bvasko) account. The repo can be found at, [Github repo](https://bvasko.github.io/image-creator/).
